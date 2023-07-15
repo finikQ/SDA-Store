@@ -7,12 +7,7 @@ const TheHeader = () => {
     <header className={styles.header}>
       <div className={styles.logo}>
         <a>
-          <Image
-            src="http://localhost:3000/vercel.svg"
-            alt="asd"
-            width={130}
-            height={22}
-          />
+          <Image src="/vercel.svg" alt="asd" width={130} height={22} />
         </a>
       </div>
       <nav className={styles.menu}>
@@ -29,29 +24,14 @@ const TheHeader = () => {
       </div>
       <div className={styles.toolbar}>
         <div>
-          <Image
-            src="http://localhost:3000/Profile.svg"
-            alt="favorites"
-            width={20}
-            height={20}
-          />
+          <Image src="/Profile.svg" alt="favorites" width={20} height={20} />
         </div>
         <a>
-          <Image
-            src="http://localhost:3000/heart.svg"
-            alt="favorites"
-            width={20}
-            height={20}
-          />
+          <Image src="/heart.svg" alt="favorites" width={20} height={20} />
           <div>2</div>
         </a>
         <a>
-          <Image
-            src="http://localhost:3000/Cart.svg"
-            alt="cart"
-            width={20}
-            height={20}
-          />
+          <Image src="/Cart.svg" alt="cart" width={20} height={20} />
           <div>4</div>
         </a>
       </div>
