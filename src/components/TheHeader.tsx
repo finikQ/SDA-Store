@@ -5,7 +5,7 @@ import styles from "./theheader.module.css";
 const TheHeader = () => {
   return (
     <header className={styles.header}>
-      <div>
+      <div className={styles.logo}>
         <a>
           <Image
             src="http://localhost:3000/vercel.svg"
@@ -43,7 +43,7 @@ const TheHeader = () => {
             width={20}
             height={20}
           />
-          2
+          <div>2</div>
         </a>
         <a>
           <Image
