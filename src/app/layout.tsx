@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { TheHeader } from "@/components/TheHeader";
 import { TheFooter } from "@/components/TheFooter";
+import { ReduxProvider } from "@/redux/provider";
 
 export const metadata: Metadata = {
   title: "SDA Vintage Store",
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <TheHeader />
-        <main>{children}</main>
-        <TheFooter />
+        <ReduxProvider>
+          <TheHeader />
+          <main>{children}</main>
+          <TheFooter />
+        </ReduxProvider>
       </body>
     </html>
   );

@@ -6,7 +6,16 @@ import Link from "next/link";
 import React from "react";
 import styles from "./product.module.css";
 
+import { addProduct } from "@/redux/features/cart-slice";
+import { useDispatch } from "react-redux";
+
 export const Product = ({ product }) => {
+  const dispatch = useDispatch();
+
+  const addProductHandler = () => {
+    dispatch(addProduct(product));
+  };
+
   return (
     <div key={product.id} className={styles.product}>
       <a href={`/clother/${product.id}`}>
@@ -15,7 +24,7 @@ export const Product = ({ product }) => {
           alt={product.description}
           width={250}
           height={250}
-        ></Image>
+        />
       </a>
 
       <div className={styles["card-body"]}>
@@ -24,7 +33,7 @@ export const Product = ({ product }) => {
 
       <div className={styles["card-footer"]}>
         <div>{product.price} ₽</div>
-        <button>В Корзину</button>
+        <button onClick={addProductHandler}>В Корзину</button>
       </div>
 
       <div className={styles["card-favorite"]}>

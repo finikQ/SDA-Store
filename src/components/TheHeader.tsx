@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./theheader.module.css";
+import { CartCount } from "./header/cartCount";
 
 const TheHeader = () => {
   return (
@@ -30,10 +31,12 @@ const TheHeader = () => {
           <Image src="/heart.svg" alt="favorites" width={20} height={20} />
           <div>2</div>
         </a>
-        <a>
+        <Link href="/cart">
           <Image src="/Cart.svg" alt="cart" width={20} height={20} />
-          <div>4</div>
-        </a>
+          <div>
+            <CartCount />
+          </div>
+        </Link>
       </div>
     </header>
   );

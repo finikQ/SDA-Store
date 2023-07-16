@@ -25,6 +25,9 @@
   object-fit: cover;
   border-radius: 12px;
   transition: transform 0.3s ease-in-out;
+
+  width: auto;
+  /* height: auto; */
 }
 
 .product > a:first-child img:hover {
