@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
+import styles from "./main.module.css";
 
 import { TheHeader } from "@/components/TheHeader";
 import { TheFooter } from "@/components/TheFooter";
@@ -21,7 +22,7 @@ export default function RootLayout({
       <body>
         <ReduxProvider>
           <TheHeader />
-          <main>{children}</main>
+          <main className={styles.main}>{children}</main>
           <TheFooter />
         </ReduxProvider>
       </body>
