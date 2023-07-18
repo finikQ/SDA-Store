@@ -28,7 +28,7 @@ export default async function Clother({ params: { id } }: Props) {
             height={550}
           />
           <div>
-            {product.images.map((image) => (
+            {product.images.map((image: string) => (
               <Image
                 key={image}
                 src={image}

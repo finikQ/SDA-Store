@@ -30,7 +30,7 @@ const TheHeader = () => {
         <Link href="/wishlist">
           <Image src="/heart.svg" alt="wishlist" width={20} height={20} />
           <div>2</div>
-        </Link>s
+        </Link>
         <Link href="/cart">
           <Image src="/Cart.svg" alt="cart" width={20} height={20} />
           <div>
