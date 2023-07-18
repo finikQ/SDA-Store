@@ -7,9 +7,9 @@ const TheHeader = () => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <a>
+        <Link href="/">
           <Image src="/vercel.svg" alt="asd" width={130} height={22} />
-        </a>
+        </Link>
       </div>
       <nav className={styles.menu}>
         <Link href="/new">Новинки</Link>
@@ -25,12 +25,12 @@ const TheHeader = () => {
       </div>
       <div className={styles.toolbar}>
         <div>
-          <Image src="/Profile.svg" alt="favorites" width={20} height={20} />
+          <Image src="/Profile.svg" alt="profile" width={20} height={20} />
         </div>
-        <a>
-          <Image src="/heart.svg" alt="favorites" width={20} height={20} />
+        <Link href="/wishlist">
+          <Image src="/heart.svg" alt="wishlist" width={20} height={20} />
           <div>2</div>
-        </a>
+        </Link>s
         <Link href="/cart">
           <Image src="/Cart.svg" alt="cart" width={20} height={20} />
           <div>
