@@ -18,15 +18,14 @@ export const Product = ({ product }) => {
 
   return (
     <div key={product.id} className={styles.product}>
-      <a href={`/clother/${product.id}`}>
+      <Link href={`/clother/${product.id}`}>
         <Image
           src={product.images[0]}
           alt={product.description}
           width={250}
           height={250}
         />
-      </a>
-
+      </Link>
       <div className={styles["card-body"]}>
         <Link href={`/clother/${product.id}`}>{product.title}</Link>
       </div>
