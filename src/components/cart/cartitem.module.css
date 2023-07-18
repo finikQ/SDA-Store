@@ -1,0 +1,54 @@
+.order-item {
+  display: flex;
+}
+
+.order-item div img {
+  border-radius: 4px;
+}
+
+.order-info {
+  color: var(--gray-900, #1e212c);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  appearance: textfield;
+}
+
+.order-count {
+  display: flex;
+  position: relative;
+}
+
+.order-count input {
+  display: flex;
+  width: 72px;
+  height: 36px;
+  padding: 9px 12px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 25px;
+  flex-shrink: 0;
+
+  border-radius: 4px;
+  border: 1px solid var(--gray-400, #d7dadd);
+  background: var(--white, #fff);
+}
+
+.count-buttons {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+}
+    

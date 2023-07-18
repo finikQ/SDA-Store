@@ -1,23 +1,37 @@
 "use client";
 
 import React from "react";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { CartItem } from "./CartItem";
+import Link from "next/link";
+import styles from "./cart.module.css";
 
 export const Cart = () => {
-  const dispatch = useDispatch();
   const { products, totalPrice } = useSelector(
     (state: RootState) => state.cartSlice.value
   );
   return (
     <div>
+      <div>Breadcrumb</div>
+      <div className={styles.checkout}>
+        <div>
+          <h1>Корзина</h1>
+          <Link href="/clother">Назад к Покупкам</Link>
+        </div>
+        <div>
+          {products.map((product) => (
+            <CartItem key={product.id} product={product} />
+          ))}
+        </div>
+      </div>
+
       <div>
-        {products.map((product) => (
-          <CartItem key={product.id} product={product} />
-        ))}
-        <div>Общая стоимость: {totalPrice} ₽</div>
+        <div>Итоги заказа</div>
+        <div>Сумма: {totalPrice} ₽</div>
+        <div>ДоставкаName: ДоставкаPrice 500 ₽</div>
+        <div>Итоговая сумма: {totalPrice + 500} ₽</div>
+        <button>Подтвердить</button>
       </div>
     </div>
   );
