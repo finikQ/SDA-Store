@@ -7,22 +7,22 @@ const TheFooter = () => {
     {
       name: "telegram",
       href: "https://t.me/sda_store",
-      img_src: "social/telegram.svg",
+      img_src: "/social/telegram.svg",
     },
     {
       name: "instagram",
       href: "https://www.instagram.com/sda_store/",
-      img_src: "social/instagram.svg",
+      img_src: "/social/instagram.svg",
     },
     {
       name: "tiktok",
       href: "https://www.tiktok.com/@sda_store",
-      img_src: "social/tiktok.svg",
+      img_src: "/social/tiktok.svg",
     },
     {
       name: "pinterest",
       href: "https://www.pinterest.com/sda_store",
-      img_src: "social/pinterest.svg",
+      img_src: "/social/pinterest.svg",
     },
   ];
 
