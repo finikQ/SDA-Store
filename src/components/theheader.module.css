@@ -5,6 +5,7 @@
   height: 62px;
   box-sizing: border-box;
   padding: 0 250px;
+  flex-shrink: 0;
 }
 
 .header > * {
