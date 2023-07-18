@@ -36,7 +36,6 @@ export const CartItem = ({ product }: CartItemProps) => {
 
   const removeProductHandler = () => {
     if (product.count == 1) {
-      dispatch(deleteProduct(product.id));
     } else {
       dispatch(removeProduct(product.id));
     }
@@ -48,20 +47,18 @@ export const CartItem = ({ product }: CartItemProps) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = Number(event.target.value);
-    if (inputValue === 0) {
-      dispatch(deleteProduct(product.id));
-    }
-
     const payload = {
       id: product.id,
-      count: inputValue > product.stock ? product.stock : inputValue,
+      count: 1,
     };
-
+    if (inputValue >= 1) {
+      payload.count = inputValue > product.stock ? product.stock : inputValue;
+    }
     dispatch(setProductCount(payload));
   };
 
   return (
-    <div className={styles["order-item"]}>
+    <div className={styles["item"]}>
       <div>
         <Link href={`/clother/${product.id}`}>
           <Image
@@ -73,27 +70,31 @@ export const CartItem = ({ product }: CartItemProps) => {
         </Link>
       </div>
 
-      <div className={styles["order-info"]}>{product.title}</div>
+      <div className={styles["item-info"]}>
+        <Link href={`/clother/${product.id}`}>{product.title}</Link>
+      </div>
 
-      <div className={styles["order-count"]}>
+      <div className={styles["item-count"]}>
+        <button onClick={removeProductHandler}></button>
         <input
           type="number"
           max={product.stock}
           value={product.count}
           onChange={handleChange}
         />
-        <div className={styles["count-buttons"]}>
-          <button onClick={addProductHandler}>+</button>
-          <button onClick={removeProductHandler}>-</button>
-        </div>
+        <button onClick={addProductHandler}></button>
       </div>
 
-      <div>{product.price * (product.count ?? 1)}</div>
-      <div>
-        <div>
-          <button onClick={deleteProductHandler}>-</button>
+      <div className={styles["item-price"]}>
+        {product.price * (product.count ?? 1)} ₽
+        <div className={styles["item-actions"]}>
+          <button>
+            <Image src="/heart.svg" alt="favorites" width={20} height={20} />
+          </button>
+          <button onClick={deleteProductHandler}>
+            <Image src="/trash.svg" alt="delete item" width={20} height={20} />
+          </button>
         </div>
-        <button>To Favorite {"<3"}</button>
       </div>
     </div>
   );

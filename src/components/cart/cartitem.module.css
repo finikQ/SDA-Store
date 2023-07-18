@@ -1,12 +1,38 @@
-.order-item {
+.item {
   display: flex;
+  gap: 24px;
+  position: relative;
 }
 
-.order-item div img {
+.item::after {
+  position: absolute;
+  bottom: -24px;
+  left: 0;
+  margin: 10px;
+  content: "";
+  display: block;
+  width: 540px;
+  height: 1px;
+  background: linear-gradient(
+    315deg,
+    rgba(218, 219, 221, 0) 0%,
+    rgba(218, 219, 221, 0.5) 12.33%,
+    #dadbdd 51.91%,
+    rgba(218, 219, 221, 0.5) 87.85%,
+    rgba(218, 219, 221, 0) 100%
+  );
+}
+
+.item div img {
   border-radius: 4px;
 }
 
-.order-info {
+.item > div:first-child::after {
+  background-color: brown;
+}
+
+.item-info {
+  width: 210px;
   color: var(--gray-900, #1e212c);
   font-size: 14px;
   font-style: normal;
@@ -26,17 +52,18 @@ input[type="number"] {
   appearance: textfield;
 }
 
-.order-count {
+.item-count {
   display: flex;
   position: relative;
 }
 
-.order-count input {
+.item-count input {
   display: flex;
-  width: 72px;
-  height: 36px;
-  padding: 9px 12px;
-  justify-content: center;
+  text-align: center;
+  padding: 12%;
+  width: 42px;
+  height: 24px;
+
   align-items: flex-start;
   gap: 25px;
   flex-shrink: 0;
@@ -46,9 +73,77 @@ input[type="number"] {
   background: var(--white, #fff);
 }
 
-.count-buttons {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
+/* - + */
+.item-count button:first-child,
+.item-count button:last-child {
+  width: 24px;
+  height: 24px;
+
+  position: relative;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  display: inline-block;
+
+  cursor: pointer;
+  border: 0px;
+  transform: none;
+  transition: background-color 0.3s ease 0s;
 }
-    
+
+.item-count button:first-child::after,
+.item-count button:last-child::before,
+.item-count button:last-child::after {
+  content: "";
+  width: 12px;
+  height: 2px;
+  background-color: #242424;
+  border-radius: 4px;
+  display: block;
+  left: calc(50% - 6px);
+  position: absolute;
+  top: 45%;
+}
+
+.item-count button:last-child::before {
+  transform: rotate(-90deg);
+}
+
+.item-price {
+  color: var(--gray-800, #424551);
+  text-align: right;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 160%;
+  flex-grow: 1;
+  white-space: nowrap;
+}
+
+.item-actions {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.item-actions button {
+  margin-top: 10px;
+  right: 0px;
+  border: 0px;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  cursor: pointer;
+}
+
+.item:hover .item-actions button {
+  opacity: 0.5;
+  visibility: visible;
+}
+
+.item-actions button:first-child:hover,
+.item-actions button:last-child:hover {
+  opacity: 1;
+}

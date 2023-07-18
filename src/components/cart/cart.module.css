@@ -1,3 +1,122 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 105px;
+}
+
 .checkout {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.checkout > div:first-child a {
+  color: var(--primary, #17696a);
+  text-align: right;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 160%;
+  text-decoration-line: underline;
+}
+
+.checkout > div:last-child {
+  color: var(--gray-900, #1e212c);
+  text-align: right;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.products {
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+}
+
+.total {
+  display: flex;
+  flex-direction: column;
+  margin-top: 46px;
+  padding: 24px;
+  gap: 24px;
+
+  width: 390px;
+  height: 297px;
+}
+
+.total_info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.total_priceInfo {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.total_priceInfo div {
+  color: var(--gray-800, #424551);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+
+.total_prices {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.total_prices div {
+  color: var(--gray-800, #424551);
+  text-align: right;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+
+.total_final_price {
+  display: flex;
+  justify-content: space-between;
+
+  color: var(--gray-900, #1e212c);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+}
+
+.total button {
+  display: flex;
+  width: 100%;
+  padding: 0px 40px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 4px;
+  background: var(--primary, #17696a);
+
+  color: var(--white, #fff);
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px; /* 300% */
+  letter-spacing: 0.5px;
+
+  cursor: pointer;
+  border: none;
 }
