@@ -77,7 +77,9 @@ export const CartItem = ({ product }: CartItemProps) => {
       <div className={styles["item-count"]}>
         <button onClick={removeProductHandler}></button>
         <input
-          type="number"
+          type="text"
+          pattern="[0-9]*"
+          inputMode="numeric"
           max={product.stock}
           value={product.count}
           onChange={handleChange}
