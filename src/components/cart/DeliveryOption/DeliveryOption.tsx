@@ -4,19 +4,19 @@ import React, { useState } from "react";
 import styles from "./deliveryoption.module.css";
 
 type DeliveryOptionProps = {
-    onCallback: (data: { deliveryOption: string; deliveryPrice: number }) => void
-  };
+  onCallback: (data: { deliveryOption: string; deliveryPrice: number }) => void;
+};
 
-export const DeliveryOption: React.FC<DeliveryOptionProps> = ({ onCallback }) => {
+export const DeliveryOption: React.FC<DeliveryOptionProps> = ({
+  onCallback,
+}) => {
   const [deliveryOption, setDeliveryOption] = useState("");
-
-
 
   const handleDeliveryOptionChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setDeliveryOption(event.target.value);
-    let deliveryPrice:number;
+    let deliveryPrice: number;
     switch (event.target.value) {
       case "Самовывоз":
         deliveryPrice = 0;
@@ -27,9 +27,11 @@ export const DeliveryOption: React.FC<DeliveryOptionProps> = ({ onCallback }) =>
       default:
         deliveryPrice = 0;
     }
-    console.log(event.target.value, " ", deliveryPrice);
-    
-    onCallback({deliveryOption: event.target.value, deliveryPrice: deliveryPrice})
+
+    onCallback({
+      deliveryOption: event.target.value,
+      deliveryPrice: deliveryPrice,
+    });
   };
 
   const [shipping_adress, setAdrress] = useState({
@@ -71,31 +73,39 @@ export const DeliveryOption: React.FC<DeliveryOptionProps> = ({ onCallback }) =>
     }
   };
   return (
-    <div>
+    <div className={styles.delivery_option}>
       <h2>Способ Доставки</h2>
-      <div>
-        <label>
+      <div className={styles.radio_group}>
+        <div className={styles["radio-container"]}>
           <input
             type="radio"
+            id="Самовывоз"
             value="Самовывоз"
             checked={deliveryOption === "Самовывоз"}
             onChange={handleDeliveryOptionChange}
           />
-          Самовывоз
-        </label>
-        <label>
+          <label htmlFor="Самовывоз" className={styles["custom-radio"]}></label>
+          <label htmlFor="Самовывоз">Самовывоз</label>
+        </div>
+
+        <div className={styles["radio-container"]}>
           <input
             type="radio"
+            id="Доставка курьером"
             value="Доставка курьером"
             checked={deliveryOption === "Доставка курьером"}
             onChange={handleDeliveryOptionChange}
           />
-          Доставка курьером
-        </label>
+          <label
+            htmlFor="Доставка курьером"
+            className={styles["custom-radio"]}
+          ></label>
+          <label htmlFor="Доставка курьером">Доставка курьером</label>
+        </div>
       </div>
 
       {deliveryOption === "Самовывоз" && (
-        <div>
+        <div className={styles.delivery_options_container}>
           <input
             type="text"
             placeholder="Имя"
@@ -110,6 +120,7 @@ export const DeliveryOption: React.FC<DeliveryOptionProps> = ({ onCallback }) =>
             value={contactInfo.contact_surname}
             onChange={handleContactInfoChange}
           />
+
           <input
             type="text"
             pattern="[0-9]*"
@@ -126,6 +137,7 @@ export const DeliveryOption: React.FC<DeliveryOptionProps> = ({ onCallback }) =>
             value={contactInfo.contact_email}
             onChange={handleContactInfoChange}
           />
+
           <input
             type="text"
             placeholder="Комментарий"
@@ -137,7 +149,7 @@ export const DeliveryOption: React.FC<DeliveryOptionProps> = ({ onCallback }) =>
       )}
 
       {deliveryOption === "Доставка курьером" && (
-        <div>
+        <div className={styles.delivery_options_container}>
           <input
             type="text"
             placeholder="Имя"
@@ -152,6 +164,7 @@ export const DeliveryOption: React.FC<DeliveryOptionProps> = ({ onCallback }) =>
             value={contactInfo.contact_surname}
             onChange={handleContactInfoChange}
           />
+
           <input
             type="text"
             placeholder="Номер телефона"
@@ -176,24 +189,24 @@ export const DeliveryOption: React.FC<DeliveryOptionProps> = ({ onCallback }) =>
             value={shipping_adress.shipping_street}
             onChange={handleAdrressChange}
           />
-          <div>
-            <input
-              type="text"
-              placeholder="Дом"
-              name="shipping_house"
-              value={shipping_adress.shipping_house}
-              onChange={handleAdrressChange}
-            />
-            <input
-              type="text"
-              placeholder="Квартира/Офис"
-              name="shipping_flat"
-              value={shipping_adress.shipping_flat}
-              onChange={handleAdrressChange}
-            />
-          </div>
+          <input
+            type="text"
+            placeholder="Дом"
+            name="shipping_house"
+            value={shipping_adress.shipping_house}
+            onChange={handleAdrressChange}
+          />
+
+          <input
+            type="text"
+            placeholder="Квартира/Офис"
+            name="shipping_flat"
+            value={shipping_adress.shipping_flat}
+            onChange={handleAdrressChange}
+          />
 
           <input type="date" placeholder="Дата доставки" />
+
           <input
             type="text"
             placeholder="Комментарий"

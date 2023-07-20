@@ -1,4 +1,4 @@
-.delivery_option {
+.payment-option {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -8,6 +8,7 @@
   display: flex;
   justify-content: space-around;
 }
+
 .radio-container {
   display: flex;
   align-items: center;
@@ -46,41 +47,4 @@
   font-style: normal;
   font-weight: 700;
   line-height: 160%;
-}
-
-.delivery_options_container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.delivery_options_container input {
-  align-items: center;
-
-  flex-basis: calc(50% - 10px);
-  width: 355px;
-  height: 52px;
-  padding: 13px 16px;
-
-  border-radius: 4px;
-  border: 1px solid var(--gray-400, #d7dadd);
-  background: var(--white, #fff);
-
-  color: var(--gray-600, #9a9ca5);
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 160%;
-}
-
-.delivery_option__user_info {
-  display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
-  max-width: calc(50% - 10px);
-}
-
-.delivery_option__user_info__width {
-  width: 100%;
-  box-sizing: border-box;
 }

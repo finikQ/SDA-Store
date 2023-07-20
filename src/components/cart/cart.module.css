@@ -2,6 +2,13 @@
   display: flex;
   justify-content: center;
   gap: 105px;
+  width: 100%;
+}
+
+.cart {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .checkout {
@@ -12,7 +19,6 @@
 
 .checkout > div:first-child a {
   color: var(--primary, #17696a);
-  text-align: right;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -22,7 +28,6 @@
 
 .checkout > div:last-child {
   color: var(--gray-900, #1e212c);
-  text-align: right;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -72,7 +77,8 @@
 }
 
 .total_prices {
-  display: inline-flex;
+  flex: 1;
+  display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 4px;
@@ -96,6 +102,7 @@
   font-style: normal;
   font-weight: 700;
   line-height: 150%;
+  white-space: nowrap;
 }
 
 .total button {
@@ -119,4 +126,5 @@
 
   cursor: pointer;
   border: none;
+  white-space: nowrap;
 }
