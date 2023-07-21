@@ -58,44 +58,55 @@ export const CartItem = ({ product }: CartItemProps) => {
   };
 
   return (
-    <div className={styles["item"]}>
-      <div>
-        <Link href={`/clother/${product.id}`}>
-          <Image
-            src={product.images[0]}
-            alt={product.description}
-            width={80}
-            height={80}
+    <div className={styles.item__container}>
+      <div className={styles.item}>
+        <div className={styles.item__image_container}>
+          <Link href={`/clother/${product.id}`}>
+            <Image
+              src={product.images[0]}
+              alt={product.description}
+              width={100}
+              height={100}
+            />
+          </Link>
+        </div>
+
+        <div className={styles["item-info"]}>
+          <Link href={`/clother/${product.id}`}>{product.title}</Link>
+        </div>
+
+        <div>
+          <div>{product.price} / шт</div>
+        </div>
+
+        <div className={styles["item-count"]}>
+          <button onClick={removeProductHandler}></button>
+          <input
+            type="text"
+            pattern="[0-9]*"
+            inputMode="numeric"
+            max={product.stock}
+            value={product.count}
+            onChange={handleChange}
           />
-        </Link>
-      </div>
+          <button onClick={addProductHandler}></button>
+        </div>
 
-      <div className={styles["item-info"]}>
-        <Link href={`/clother/${product.id}`}>{product.title}</Link>
-      </div>
-
-      <div className={styles["item-count"]}>
-        <button onClick={removeProductHandler}></button>
-        <input
-          type="text"
-          pattern="[0-9]*"
-          inputMode="numeric"
-          max={product.stock}
-          value={product.count}
-          onChange={handleChange}
-        />
-        <button onClick={addProductHandler}></button>
-      </div>
-
-      <div className={styles["item-price"]}>
-        {product.price * (product.count ?? 1)} ₽
-        <div className={styles["item-actions"]}>
-          <button>
-            <Image src="/heart.svg" alt="favorites" width={20} height={20} />
-          </button>
-          <button onClick={deleteProductHandler}>
-            <Image src="/trash.svg" alt="delete item" width={20} height={20} />
-          </button>
+        <div className={styles["item-price"]}>
+          {product.price * (product.count ?? 1)} ₽
+          <div className={styles["item-actions"]}>
+            <button>
+              <Image src="/heart.svg" alt="favorites" width={20} height={20} />
+            </button>
+            <button onClick={deleteProductHandler}>
+              <Image
+                src="/trash.svg"
+                alt="delete item"
+                width={20}
+                height={20}
+              />
+            </button>
+          </div>
         </div>
       </div>
     </div>

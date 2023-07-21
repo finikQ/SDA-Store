@@ -31,45 +31,56 @@ export const Cart = () => {
     <div>
       <div>Breadcrumb</div>
       <div className={styles.container}>
-        <div className={styles.cart}>
-          <div className={styles.checkout}>
-            <div className={styles.title}>
-              <h1>Корзина</h1>
-              <Link href="/clother" aria-label="Назад к Покупкам">
-                Назад к Покупкам
-              </Link>
-            </div>
-
-            <div className={styles.products}>
-              {products.map((product) => (
-                <CartItem key={product.id} product={product} />
-              ))}
-              <div>Общая сумма: {totalPrice} ₽</div>
-            </div>
-          </div>
-          <DeliveryOption onCallback={handleCallback} />
-          <PaymentOption onCallback={handlePaymentOptionCallback} />
+        <div className={styles.title}>
+          <h1>Корзина</h1>
         </div>
-
-        <div className={styles.total}>
-          <h4>Итоги заказа</h4>
-
-          <div className={styles.total_info}>
-            <div className={styles.total_priceInfo}>
-              <div>Сумма:</div>
-              <div>{deliveryOption}:</div>
+        <div className={styles.cart__container}>
+          <div className={styles.cart}>
+            <div className={styles.checkout}>
+              <div className={styles.products}>
+                {products.map((product) => (
+                  <CartItem key={product.id} product={product} />
+                ))}
+                <div>Общая сумма: {totalPrice} ₽</div>
+              </div>
             </div>
-            <div className={styles.total_prices}>
-              <div>{totalPrice} ₽</div>
-              <div>{deliveryPrice} ₽</div>
+            <DeliveryOption onCallback={handleCallback} />
+            <PaymentOption onCallback={handlePaymentOptionCallback} />
+          </div>
+          <div className={styles.totalPrice__container}>
+            <div className={styles.totalPrice__wrapper}>
+
+              <div className={styles.totalPrice}>
+                <div className={styles.totalPrice__title}>
+                  <h2>Итоги заказа</h2>
+                </div>
+                <div className={styles.totalPrice__subTotal__container}>
+                  <div className={styles.totalPrice__subTotal}>
+                    <div className={styles.totalPrice__line}>
+                      <div>Сумма:</div>
+                      <div>{totalPrice} ₽</div>
+                    </div>
+                    <div className={styles.totalPrice__line}>
+                      <div>{deliveryOption}:</div>
+                      <div>{deliveryPrice} ₽</div>
+                    </div>
+                  </div>
+                </div>
+                <div className={styles.totalPrice__finalTotal}>
+                  <div className={styles.totalPrice__line}>
+                    <div>Итоговая сумма: </div>
+                    <div>{totalPrice + deliveryPrice} ₽</div>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.totalPrice__ConfirmButton}>
+                <button tabIndex={0} aria-label="Оформить Заказ">
+                  Оформить Заказ
+                </button>
+              </div>
+              
             </div>
           </div>
-
-          <div className={styles.total_final_price}>
-            <div>Итоговая сумма: </div>
-            <div>{totalPrice + deliveryPrice} ₽</div>
-          </div>
-          <button aria-label="Оформить Заказ">Оформить Заказ</button>
         </div>
       </div>
     </div>
