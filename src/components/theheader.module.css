@@ -64,7 +64,7 @@
 }
 
 .toolbar {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   min-width: 80px;
 }
@@ -85,23 +85,24 @@
   );
 }
 
-.toolbar > * {
+.toolbar a {
   display: flex;
   align-items: center;
   cursor: pointer;
   white-space: nowrap;
 }
 
-.toolbar a img {
-  margin-right: 8px;
+.toolbar span {
+  margin-left: 5px;
 }
 
-.toolbar a:last-child div {
-  display: flex;
-  padding: 1px 8px;
-  align-items: center;
-  gap: 10px;
-
+.toolbar a span {
+  text-align: center;
+  min-width: 25px;
+  padding: 2px 4px;
   border-radius: 4px;
   background: var(--success, #03cea4);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
 }

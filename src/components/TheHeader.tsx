@@ -23,19 +23,20 @@ const TheHeader = () => {
           <input placeholder="Найти"></input>
         </form>
       </div>
+
       <div className={styles.toolbar}>
-        <div>
+        <Link href="#">
           <Image src="/Profile.svg" alt="profile" width={20} height={20} />
-        </div>
-        <Link href="/wishlist">
+        </Link>
+        <Link href="#">
           <Image src="/heart.svg" alt="wishlist" width={20} height={20} />
-          <div>2</div>
+          <span>2</span>
         </Link>
         <Link href="/cart">
           <Image src="/Cart.svg" alt="cart" width={20} height={20} />
-          <div>
+          <span>
             <CartCount />
-          </div>
+          </span>
         </Link>
       </div>
     </header>
