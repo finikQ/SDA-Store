@@ -21,9 +21,15 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ReduxProvider>
-          <TheHeader />
-          <main className={styles.main}>{children}</main>
-          <TheFooter />
+          <div className={styles.layout__container}>
+            <div className={styles.layout__header}>
+              <TheHeader />
+            </div>
+            <main className={styles.layout__main}>{children}</main>
+            <div>
+              <TheFooter />
+            </div>
+          </div>
         </ReduxProvider>
       </body>
     </html>

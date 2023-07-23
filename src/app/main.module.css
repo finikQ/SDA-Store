@@ -1,4 +1,9 @@
-.main {
-  flex-grow: 1;
-  padding: 0 345px;
+.layout__header {
+  max-width: 1230px;
+  margin: 0 auto;
+}
+
+.layout__main {
+  max-width: 1230px;
+  margin: 0 auto;
 }

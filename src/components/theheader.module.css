@@ -1,19 +1,14 @@
 .header {
+  box-sizing: border-box;
+}
+
+.header__container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 62px;
   box-sizing: border-box;
-  padding: 0 250px;
   flex-shrink: 0;
-}
-
-.header > * {
-  margin-right: 12px;
-}
-
-.header > *:last-child {
-  margin-right: 0;
 }
 
 .logo a {
