@@ -29,9 +29,9 @@ export const CartItem = ({ product }: CartItemProps) => {
         count: product.stock,
       };
       dispatch(setProductCount(payload));
+    } else {
+      dispatch(addProduct(product));
     }
-
-    dispatch(addProduct(product));
   };
 
   const removeProductHandler = () => {
