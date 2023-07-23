@@ -1,20 +1,56 @@
-.item__container {
-  border-top: 1px solid rgba(204, 214, 228, 0.6);
+.product__container {
+  border-bottom: 1px solid rgba(204, 214, 228, 0.6);
   padding: 16px 0px;
 }
 
-.item {
+.product {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.item-count {
+.product_position {
+  padding-left: 16px;
+  padding-right: 8px;
+}
+
+.product__info {
+  align-items: flex-start;
+  flex-grow: 2;
+  max-width: 444px;
+  width: 100%;
+}
+
+.product__info a {
+  color: #1e212c;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+}
+
+.product__info div {
+  color: #787a80;
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.product__count_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.product__count {
   display: flex;
   position: relative;
 }
 
-.item-count input {
+.product__count input {
   display: flex;
   text-align: center;
   padding: 10%;
@@ -26,12 +62,12 @@
   flex-shrink: 0;
 
   border-radius: 4px;
-  border: 1px solid  #d7dadd;
-  background:  #fff;
+  border: 1px solid #d7dadd;
+  background: #fff;
 }
 
-.item-count button:first-child,
-.item-count button:last-child {
+.product__count button:first-child,
+.product__count button:last-child {
   width: 24px;
   height: 24px;
 
@@ -48,9 +84,9 @@
   transition: background-color 0.3s ease 0s;
 }
 
-.item-count button:first-child::after,
-.item-count button:last-child::before,
-.item-count button:last-child::after {
+.product__count button:first-child::after,
+.product__count button:last-child::before,
+.product__count button:last-child::after {
   content: "";
   width: 12px;
   height: 2px;
@@ -62,12 +98,24 @@
   top: 45%;
 }
 
-.item-count button:last-child::before {
+.product__count button:last-child::before {
   transform: rotate(-90deg);
 }
 
-.item-price {
-  color:  #424551;
+.product__count_price {
+  text-align: center;
+
+  color: #787a80;
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.product__price {
+  padding: 0 24px;
+  color: #424551;
   min-width: 90px;
   text-align: right;
   font-size: 16px;
@@ -94,7 +142,7 @@
   cursor: pointer;
 }
 
-.item:hover .item-actions button {
+.product:hover .item-actions button {
   opacity: 0.5;
   visibility: visible;
 }

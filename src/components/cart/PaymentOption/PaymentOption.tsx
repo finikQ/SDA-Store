@@ -8,7 +8,7 @@ type PaymentOptionProps = {
 };
 
 export const PaymentOption: React.FC<PaymentOptionProps> = ({ onCallback }) => {
-  const [paymentOption, setPaymentOption] = useState("");
+  const [paymentOption, setPaymentOption] = useState("cash");
   const handlePaymentOptionChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {

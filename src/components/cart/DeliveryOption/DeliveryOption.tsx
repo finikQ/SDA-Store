@@ -10,7 +10,7 @@ type DeliveryOptionProps = {
 export const DeliveryOption: React.FC<DeliveryOptionProps> = ({
   onCallback,
 }) => {
-  const [deliveryOption, setDeliveryOption] = useState("");
+  const [deliveryOption, setDeliveryOption] = useState("Самовывоз");
 
   const handleDeliveryOptionChange = (
     event: React.ChangeEvent<HTMLInputElement>

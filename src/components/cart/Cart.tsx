@@ -14,7 +14,7 @@ export const Cart = () => {
     (state: RootState) => state.cartSlice.value
   );
 
-  const [deliveryOption, setDeliveryOption] = useState("");
+  const [deliveryOption, setDeliveryOption] = useState("Самовывоз");
   const [deliveryPrice, setDeliveryPrice] = useState(0);
 
   const handleCallback = (data: {
@@ -29,19 +29,19 @@ export const Cart = () => {
 
   return (
     <div>
-      <div>Breadcrumb</div>
+      {/* <div>Breadcrumb</div> */}
       <div className={styles.container}>
         <div className={styles.title}>
           <h1>Корзина</h1>
         </div>
         <div className={styles.cart__container}>
           <div className={styles.cart}>
-            <div className={styles.checkout}>
-              <div className={styles.products}>
-                {products.map((product) => (
-                  <CartItem key={product.id} product={product} />
-                ))}
-                <div>Общая сумма: {totalPrice} ₽</div>
+            <div className={styles.products}>
+              {products.map((product) => (
+                <CartItem key={product.id} product={product} />
+              ))}
+              <div className={styles.products__totalPrice}>
+                Общая сумма: {totalPrice} ₽
               </div>
             </div>
             <DeliveryOption onCallback={handleCallback} />
@@ -49,7 +49,6 @@ export const Cart = () => {
           </div>
           <div className={styles.totalPrice__container}>
             <div className={styles.totalPrice__wrapper}>
-
               <div className={styles.totalPrice}>
                 <div className={styles.totalPrice__title}>
                   <h2>Итоги заказа</h2>
@@ -78,7 +77,6 @@ export const Cart = () => {
                   Оформить Заказ
                 </button>
               </div>
-              
             </div>
           </div>
         </div>

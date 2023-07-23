@@ -58,9 +58,11 @@ export const CartItem = ({ product }: CartItemProps) => {
   };
 
   return (
-    <div className={styles.item__container}>
-      <div className={styles.item}>
-        <div className={styles.item__image_container}>
+    <div className={styles.product__container}>
+      <div className={styles.product}>
+        <div
+          className={`${styles.product__image_container} ${styles.product_position}`}
+        >
           <Link href={`/clother/${product.id}`}>
             <Image
               src={product.images[0]}
@@ -71,28 +73,31 @@ export const CartItem = ({ product }: CartItemProps) => {
           </Link>
         </div>
 
-        <div className={styles["item-info"]}>
+        <div className={`${styles.product__info} ${styles.product_position}`}>
           <Link href={`/clother/${product.id}`}>{product.title}</Link>
+          <div>{product.description}</div>
         </div>
 
-        <div>
-          <div>{product.price} / шт</div>
+        <div
+          className={`${styles.product__count_wrapper} ${styles.product_position}`}
+        >
+          <div className={`${styles.product__count}`}>
+            <button onClick={removeProductHandler}></button>
+            <input
+              type="text"
+              pattern="[0-9]*"
+              inputMode="numeric"
+              max={product.stock}
+              value={product.count}
+              onChange={handleChange}
+            />
+            <button onClick={addProductHandler}></button>
+          </div>
+          <div className={`${styles.product__count_price}`}>
+            {product.price} ₽
+          </div>
         </div>
-
-        <div className={styles["item-count"]}>
-          <button onClick={removeProductHandler}></button>
-          <input
-            type="text"
-            pattern="[0-9]*"
-            inputMode="numeric"
-            max={product.stock}
-            value={product.count}
-            onChange={handleChange}
-          />
-          <button onClick={addProductHandler}></button>
-        </div>
-
-        <div className={styles["item-price"]}>
+        <div className={styles.product__price}>
           {product.price * (product.count ?? 1)} ₽
           <div className={styles["item-actions"]}>
             <button>
