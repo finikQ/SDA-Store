@@ -11,13 +11,7 @@
 .mainWrapper {
   box-sizing: border-box;
   display: flex;
-  flex-wrap: wrap;
-}
-/* ---------- Фильтр ---------- */
-
-.filters {
-  flex-basis: 10%;
-  box-sizing: border-box;
+  flex-wrap: nowrap;
 }
 
 /* ---------- Каталог и Карточки ---------- */

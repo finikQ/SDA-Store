@@ -4,8 +4,10 @@ import dynamic from "next/dynamic";
 import React from "react";
 import styles from "./catalog.module.css";
 import { Product } from "./product/Product";
+import { typeCartItem } from "@/redux/features/cart-slice";
+import { Filters } from "./filters/Filters";
 
-export const Catalog = ({ props }) => {
+export const Catalog: React.FC<{ props: typeCartItem[] }> = ({ props }) => {
   return (
     <div>
       <div className={styles.breadcrumb}>
@@ -15,10 +17,7 @@ export const Catalog = ({ props }) => {
       <div className={styles.toolbar}>Some buttons</div>
       <div className={styles.mainWrapper}>
         <div className={styles.filters}>
-          <aside>
-            <div>Цена</div>
-            <div>Размер</div>
-          </aside>
+          <Filters props={props} />
         </div>
         <div className={styles.productList}>
           {props.map((product) => (

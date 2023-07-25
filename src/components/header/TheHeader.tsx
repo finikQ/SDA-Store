@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./theheader.module.css";
-import { CartCount } from "./header/cartCount";
+import { CartCount } from "./cartCount";
 
 const TheHeader = () => {
   return (

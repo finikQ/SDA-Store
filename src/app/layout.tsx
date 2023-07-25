@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import styles from "./main.module.css";
 
-import { TheHeader } from "@/components/TheHeader";
-import { TheFooter } from "@/components/TheFooter";
+import { TheHeader } from "@/components/header/TheHeader";
+import { TheFooter } from "@/components/footer/TheFooter";
 import { ReduxProvider } from "@/redux/provider";
 
 export const metadata: Metadata = {

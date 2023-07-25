@@ -1,4 +1,4 @@
-import { Catalog } from "../../components/Catalog.jsx";
+import { Catalog } from "../../components/catalog/Catalog";
 
 async function getProducts() {
   const response = await fetch("https://dummyjson.com/products");
