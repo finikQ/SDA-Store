@@ -58,7 +58,23 @@ export const Filters: React.FC<{
             onClick={handleShowBrands}
           >
             <div className={styles.filters__filter__name}>Бренд</div>
-            <div>{visibleFilter.visibleBrands ? "-" : "+"}</div>
+            <div>
+              {visibleFilter.visibleBrands ? (
+                <Image
+                  src="/catalog/filter/minus.svg"
+                  alt="Убрать фильтр цены"
+                  width={16}
+                  height={16}
+                />
+              ) : (
+                <Image
+                  src="/catalog/filter/plus.svg"
+                  alt="Убрать фильтр цены"
+                  width={16}
+                  height={16}
+                />
+              )}
+            </div>
           </button>
 
           <div
@@ -124,7 +140,23 @@ export const Filters: React.FC<{
             onClick={handleShowPrices}
           >
             <div className={styles.filters__filter__name}>Цена</div>
-            <div>{visibleFilter.visiblePrices ? "-" : "+"}</div>
+            <div>
+              {visibleFilter.visiblePrices ? (
+                <Image
+                  src="/catalog/filter/minus.svg"
+                  alt="Убрать фильтр цены"
+                  width={16}
+                  height={16}
+                />
+              ) : (
+                <Image
+                  src="/catalog/filter/plus.svg"
+                  alt="Убрать фильтр цены"
+                  width={16}
+                  height={16}
+                />
+              )}
+            </div>
           </button>
 
           <div
@@ -158,7 +190,23 @@ export const Filters: React.FC<{
             onClick={handleShowSizes}
           >
             <div className={styles.filters__filter__name}>Размер</div>
-            <div>{visibleFilter.visibleSizes ? "-" : "+"}</div>
+            <div>
+              {visibleFilter.visibleSizes ? (
+                <Image
+                  src="/catalog/filter/minus.svg"
+                  alt="Убрать фильтр цены"
+                  width={16}
+                  height={16}
+                />
+              ) : (
+                <Image
+                  src="/catalog/filter/plus.svg"
+                  alt="Убрать фильтр цены"
+                  width={16}
+                  height={16}
+                />
+              )}
+            </div>
           </button>
 
           <div

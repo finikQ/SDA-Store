@@ -8,9 +8,5 @@ async function getProducts() {
 export default async function Clothers() {
   let clothersList = await getProducts();
 
-  return (
-    <div>
-      <Catalog props={clothersList.products} />
-    </div>
-  );
+  return <Catalog props={clothersList.products} />;
 }

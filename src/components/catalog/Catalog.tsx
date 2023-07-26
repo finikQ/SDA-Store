@@ -6,8 +6,25 @@ import styles from "./catalog.module.css";
 import { Product } from "./product/Product";
 import { typeCartItem } from "@/redux/features/cart-slice";
 import { Filters } from "./filters/Filters";
+import Image from "next/image";
+import Breadcrumb from "@/utils/Breadcrumb";
 
 export const Catalog: React.FC<{ props: typeCartItem[] }> = ({ props }) => {
+  const breadcrumbs = [
+    {
+      title: (
+        <Image
+          src="/breadcrumbs/Home.svg"
+          alt="На главную"
+          width={16}
+          height={16}
+        />
+      ),
+      link: "/",
+    },
+    { title: "Каталог", link: "/clother" },
+  ];
+
   const [filters, setFilters] = useState<{
     brands: string[];
     minPrice: number;
@@ -56,36 +73,90 @@ export const Catalog: React.FC<{ props: typeCartItem[] }> = ({ props }) => {
     setFilters({ ...filters, sizes: [] });
   };
 
+  const clearAllFilters = () => {
+    setFilters({
+      brands: [],
+      minPrice: Math.min.apply(null, priceSet),
+      maxPrice: Math.max.apply(null, priceSet),
+      sizes: [],
+    });
+  };
+
   return (
-    <>
-      <div className={styles.breadcrumb}>
-        <div>🏠 / Каталог</div>
-        <div className={styles.activeFilters}>
-          {filters.brands.length > 0 ? (
-            <div>
-              <button onClick={clearBrandFilter}>
+    <div className={styles.catalog}>
+      <div className={styles.breadcrumb__container}>
+        <div className={styles.breadcrumb__wrapper}>
+          {/* <div>🏠 / Каталог</div> */}
+          <Breadcrumb breadcrumbs={breadcrumbs} />
+          <div className={styles.activeFilters__list}>
+            {filters.brands.length > 0 ? (
+              <button
+                className={styles.activeFilters}
+                onClick={clearBrandFilter}
+              >
+                <Image
+                  src="/catalog/cross.svg"
+                  alt="Убрать фильтр бренда"
+                  width={16}
+                  height={16}
+                />
                 <span>Бренд</span>
               </button>
-            </div>
-          ) : null}
-          {filters.minPrice != Math.min.apply(null, priceSet) ||
-          filters.maxPrice != Math.max.apply(null, priceSet) ? (
-            <div>
-              <button onClick={clearPriceFilter}>
+            ) : null}
+
+            {filters.minPrice != Math.min.apply(null, priceSet) ||
+            filters.maxPrice != Math.max.apply(null, priceSet) ? (
+              <button
+                className={styles.activeFilters}
+                onClick={clearPriceFilter}
+              >
+                <Image
+                  src="/catalog/cross.svg"
+                  alt="Убрать фильтр цены"
+                  width={16}
+                  height={16}
+                />
                 <span>Цена</span>
               </button>
-            </div>
-          ) : null}
-          {filters.sizes.length > 0 ? (
-            <div>
-              <button onClick={clearSizeFilter}>
+            ) : null}
+
+            {filters.sizes.length > 0 ? (
+              <button
+                className={styles.activeFilters}
+                onClick={clearSizeFilter}
+              >
+                <Image
+                  src="/catalog/cross.svg"
+                  alt="Убрать фильтр размера"
+                  width={16}
+                  height={16}
+                />
                 <span>Размер</span>
               </button>
-            </div>
-          ) : null}
+            ) : null}
+
+            {filters.brands.length > 0 ||
+            filters.minPrice != Math.min.apply(null, priceSet) ||
+            filters.maxPrice != Math.max.apply(null, priceSet) ||
+            filters.sizes.length > 0 ? (
+              <button
+                className={styles.activeFilters}
+                onClick={clearAllFilters}
+              >
+                <Image
+                  src="/catalog/cross.svg"
+                  alt="Убрать фильтр цены"
+                  width={16}
+                  height={16}
+                />
+                <span>Убрать все</span>
+              </button>
+            ) : null}
+          </div>
         </div>
       </div>
-      {/* <div className={styles.toolbar}>Some buttons</div> */}
+
+      {/* <div className={styles.toolbar}>paggination</div> */}
       <div className={styles.mainWrapper}>
         <div className={styles.filterList}>
           <Filters props={props} filters={filters} setFilters={setFilters} />
@@ -97,7 +168,7 @@ export const Catalog: React.FC<{ props: typeCartItem[] }> = ({ props }) => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
