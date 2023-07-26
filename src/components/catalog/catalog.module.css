@@ -1,7 +1,18 @@
-/* ---------- Вокруг Каталога ---------- */
 .breadcrumb {
   display: flex;
   justify-content: space-between;
+  padding: 16px;
+}
+
+.activeFilters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.activeFilters button {
+  border: none;
 }
 
 .toolbar {
@@ -12,15 +23,23 @@
   box-sizing: border-box;
   display: flex;
   flex-wrap: nowrap;
+  gap: 60px;
 }
 
-/* ---------- Каталог и Карточки ---------- */
+.filterList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  flex-grow: 1;
+}
+
 .productList {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
 
-  flex-basis: 90%;
+  flex-grow: 1;
   box-sizing: border-box;
   gap: 20px;
 }

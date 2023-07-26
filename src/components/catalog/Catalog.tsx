@@ -56,17 +56,11 @@ export const Catalog: React.FC<{ props: typeCartItem[] }> = ({ props }) => {
     setFilters({ ...filters, sizes: [] });
   };
 
-  console.log(
-    Math.min.apply(null, priceSet),
-    " ",
-    Math.max.apply(null, priceSet)
-  );
-
   return (
-    <div>
+    <>
       <div className={styles.breadcrumb}>
-        <div>Breadcrumb</div>
-        <div>
+        <div>🏠 / Каталог</div>
+        <div className={styles.activeFilters}>
           {filters.brands.length > 0 ? (
             <div>
               <button onClick={clearBrandFilter}>
@@ -91,18 +85,19 @@ export const Catalog: React.FC<{ props: typeCartItem[] }> = ({ props }) => {
           ) : null}
         </div>
       </div>
-      <div className={styles.toolbar}>Some buttons</div>
+      {/* <div className={styles.toolbar}>Some buttons</div> */}
       <div className={styles.mainWrapper}>
-        <div className={styles.filters}>
+        <div className={styles.filterList}>
           <Filters props={props} filters={filters} setFilters={setFilters} />
         </div>
+
         <div className={styles.productList}>
           {filteredProps.map((product) => (
-            <Product key={product.id} product={product} />
+            <Product key={product.id} props={product} />
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

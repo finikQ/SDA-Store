@@ -9,29 +9,30 @@ import styles from "./product.module.css";
 import { addProduct } from "@/redux/features/cart-slice";
 import { useDispatch } from "react-redux";
 
-export const Product = ({ product }) => {
+export const Product = ({ props }) => {
   const dispatch = useDispatch();
 
   const addProductHandler = () => {
-    dispatch(addProduct(product));
+    dispatch(addProduct(props));
   };
 
   return (
-    <div key={product.id} className={styles.product}>
-      <Link href={`/clother/${product.id}`}>
+    <div key={props.id} className={styles.product}>
+      <Link href={`/clother/${props.id}`}>
         <Image
-          src={product.images[0]}
-          alt={product.description}
-          width={250}
-          height={250}
+          src={props.images[0]}
+          alt={props.description}
+          width={285}
+          height={320}
+          layout="fixed"
         />
       </Link>
       <div className={styles["card-body"]}>
-        <Link href={`/clother/${product.id}`}>{product.title}</Link>
+        <Link href={`/clother/${props.id}`}>{props.title}</Link>
       </div>
 
       <div className={styles["card-footer"]}>
-        <div>{product.price} ₽</div>
+        <div>{props.price} ₽</div>
         <button onClick={addProductHandler}>В Корзину</button>
       </div>
 

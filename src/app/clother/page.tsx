@@ -10,7 +10,6 @@ export default async function Clothers() {
 
   return (
     <div>
-      <div></div>
       <Catalog props={clothersList.products} />
     </div>
   );

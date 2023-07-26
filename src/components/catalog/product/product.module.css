@@ -4,17 +4,19 @@
   justify-content: space-between;
   position: relative;
   border-radius: 12px;
-  max-width: 250px;
-  flex-basis: calc(25% - 20px);
-  margin: 10px;
+  max-width: 285px;
+  flex-grow: 1;
   background-color: #f2f2f2;
   box-sizing: border-box;
 }
-@media (max-width: 768px) {
-  .product {
-    flex-basis: calc(50% - 20px);
-  }
+
+.product:hover {
+  box-shadow: 0px 4px 4px -4px rgba(30, 33, 44, 0.05),
+    0px 12px 10px -6px rgba(154, 156, 165, 0.08),
+    0px 30px 24px -10px rgba(154, 156, 165, 0.1),
+    0px 80px 80px -20px rgba(154, 156, 165, 0.16);
 }
+
 .product > a {
   border-radius: 12px;
 }
@@ -25,21 +27,15 @@
   object-fit: cover;
   border-radius: 12px;
   transition: transform 0.3s ease-in-out;
-
+  display: block;
   width: auto;
-  /* height: auto; */
 }
 
-.product > a:first-child img:hover {
-  transform: scale(1.05);
-}
-/* ---------- Нижняя Часть Карточки ---------- */
 .card-body {
   flex-grow: 1;
   padding: 11px 16px;
 }
 
-/* Название Товара */
 .card-body a {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -47,8 +43,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 
-  color: var(--gray-800, #424551);
-  font-family: Lato;
+  color: #424551;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -67,12 +62,10 @@
   border-radius: 0 0 12px 12px;
 }
 
-/* Цена */
 .card-footer div {
   display: flex;
   text-align: center;
-  color: var(--gray-900, #1e212c);
-  font-family: Lato;
+  color: #1e212c;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -80,7 +73,6 @@
   white-space: nowrap;
 }
 
-/* В Корзину */
 .card-footer button {
   display: flex;
   align-items: center;
@@ -89,22 +81,28 @@
   white-space: nowrap;
 
   border-radius: 4px;
-  background: var(--primary, #17696a);
+  background: #17696a;
 
-  color: var(--white, #fff);
+  color: #fff;
   text-align: center;
-  font-family: Lato;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 32px; /* 300% */
+  line-height: 32px;
   letter-spacing: 0.5px;
 
   cursor: pointer;
   border: none;
 }
 
-/* ---------- Избранное ---------- */
+.card-footer button:hover {
+  background: #145c5d;
+}
+
+.card-footer button:active {
+  background: #145c5d;
+}
+
 .card-favorite {
   position: absolute;
   width: 20px;

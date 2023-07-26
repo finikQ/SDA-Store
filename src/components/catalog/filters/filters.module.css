@@ -1,0 +1,103 @@
+.filters__list {
+  display: flex;
+  flex-direction: column;
+  width: 255px; /* TODO: Пофиксить ширину */
+  max-width: 255px;
+  flex-grow: 1;
+}
+
+.filters__filter {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(204, 214, 228, 0.6);
+  width: 100%;
+}
+
+.filters__filter__expand_btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  align-items: center;
+}
+
+.filters__filter__name {
+  color: #1e212c;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 160%;
+}
+
+.filters__filter__list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.filters__filter__list::-webkit-scrollbar {
+  width: 3px;
+}
+
+.filters__filter__list::-webkit-scrollbar-track {
+  background-color: #e5e8ed;
+}
+
+.filters__filter__list::-webkit-scrollbar-thumb {
+  background-color: #b3b7bc;
+  border-radius: 4px;
+}
+
+.filters__filter__list::-webkit-scrollbar-thumb:hover {
+  background-color: #b3b7bc;
+}
+
+.filters__filter__numbers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: #424551;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.filters__filter__numbers input {
+  display: flex;
+  max-width: 110px;
+  padding: 9px 12px;
+  color: #424551;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.filters__filter__label {
+  display: flex;
+  width: 100%;
+  gap: 12px;
+}
+
+.filter__close {
+  display: none;
+}
+
+.filter__open {
+  display: flex;
+}
+
+.filters__filter__category_name {
+  color: #424551;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
