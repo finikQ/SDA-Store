@@ -28,7 +28,7 @@ export const Cart = () => {
   const handlePaymentOptionCallback = () => {};
 
   return (
-    <div>
+    <div className={styles.cart__wrapper}>
       {/* <div>Breadcrumb</div> */}
       <div className={styles.container}>
         <div className={styles.title}>
