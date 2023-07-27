@@ -1,5 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import Breadcrumb from "@/utils/Breadcrumb";
+import Images_gallery from "@/components/product/Images_gallery";
 
 type Props = {
   params: {
@@ -15,53 +17,78 @@ async function getProduct(id: number) {
 export default async function Clother({ params: { id } }: Props) {
   const product = await getProduct(id);
 
+  const breadcrumbs = [
+    {
+      title: (
+        <Image
+          src="/breadcrumbs/Home.svg"
+          alt="На главную"
+          width={16}
+          height={16}
+        />
+      ),
+      link: "/",
+    },
+    { title: "Каталог", link: "/clother" },
+    { title: product.title, link: `/clother/${product.id}` },
+  ];
+
   return (
-    <div>
-      <div>Breadcrumb</div>
-
-      <div className={styles.container}>
-        <div>
-          <Image
-            src={product.images[0]}
-            alt={product.description}
-            width={550}
-            height={550}
-          />
-          <div>
-            {product.images.map((image: string) => (
-              <Image
-                key={image}
-                src={image}
-                alt="image"
-                width={100}
-                height={100}
-              />
-            ))}
-          </div>
+    <div className={styles.page_container}>
+      <div className={styles.breadcrumbs_container}>
+        <div className={styles.breadcrumbs_wrapper}>
+          <Breadcrumb breadcrumbs={breadcrumbs} />
         </div>
+      </div>
 
-        <div className={styles.info}>
+      <div className={styles.product_card__wrapper}>
+        <Images_gallery product={product} />
+        <div className={styles.product_card__info}>
           <h1>{product.title}</h1>
-          <div className={styles.price}>
-            <div>{product.price} $</div>
+          <div className={styles.product_card__price}>
+            <div>{product.price} ₽</div>
             <s>
               {Math.round(
                 product.price / (1 - product.discountPercentage / 100)
               )}{" "}
-              $
+              ₽
             </s>
           </div>
 
-          <div className={styles.buttons}>
-            <button className={styles.toCart}>В Корзину</button>
-            <button>
-              <Image src="/heart.svg" alt="favorites" width={20} height={20} />
-            </button>
+          <div className={styles.product__info}>
+            <div className={styles.product__info__description}>
+              <strong>Бренд: </strong>
+              {product.brand}
+            </div>
+            <div className={styles.product__info__description}>
+              <strong>Цвет: </strong>
+              {<u>цвет</u>}
+            </div>
+            <div className={styles.product__info__description}>
+              <strong>Описание: </strong>
+              {product.description}
+            </div>
+            <div className={styles.product__info__description}>
+              <strong>Состояние: </strong>
+              {<u>состояние</u>}
+            </div>
           </div>
 
-          <div className={styles.description}>
-            <div>Бренд: {product.brand}</div>
-            <div>Описание: {product.description}</div>
+          <div className={styles.product_card__buttons}>
+            <button className={styles.product_card__buttons__toCart}>
+              <Image
+                src="/catalog/product/cart.svg"
+                alt="Корзина"
+                width={15}
+                height={13.667}
+              />
+              <span>В Корзину</span>
+            </button>
+            <button className={styles.product_card__buttons__toFavorite}>
+              <Image src="/heart.svg" alt="Избранное" width={16} height={16} />
+
+              <span>Избранное</span>
+            </button>
           </div>
         </div>
       </div>
