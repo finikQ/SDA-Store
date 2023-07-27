@@ -75,6 +75,17 @@
   gap: 8px;
 
   background: #17696a;
+
+  cursor: pointer;
+  border-radius: 4px;
+  border: none;
+}
+
+.product_card__buttons__toCart:hover {
+  background: #145c5d;
+}
+
+.product_card__buttons__toCart span {
   color: #fff;
 
   font-size: 14px;
@@ -83,9 +94,6 @@
   line-height: 44px;
   letter-spacing: 0.5px;
 
-  cursor: pointer;
-  border-radius: 4px;
-  border: none;
   white-space: nowrap;
 }
 
@@ -101,15 +109,16 @@
 
   border-radius: 4px;
   border: 1px solid #17696a;
+  background-color: #fff;
 
-  color: #17696A;
-font-size: 14px;
-font-style: normal;
-font-weight: 700;
-line-height: 44px;
-letter-spacing: 0.5px;
+  color: #17696a;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 44px;
+  letter-spacing: 0.5px;
 
-cursor: pointer;
+  cursor: pointer;
 }
 
 .product__info {
