@@ -24,7 +24,7 @@
 }
 
 .footer > div > h3 {
-  color: var(--white, #fff);
+  color: #fff;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -35,8 +35,8 @@
 }
 
 .footer > div > a {
-  color: var(--white, #fff);
-  /* base/regular */
+  color: #fff;
+
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -45,8 +45,7 @@
 }
 
 .footer > div > div {
-  color: var(--white, #fff);
-  /* base/regular */
+  color: #fff;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -54,29 +53,31 @@
   opacity: 0.6;
 }
 
-.social-links {
+.footer__social {
   display: flex;
   flex-wrap: wrap;
   list-style-type: none;
+  gap: 12px;
 }
 
-.social-links a {
-  width: 25%;
+.footer__social__item {
+  position: relative;
+  width: 32px;
+  height: 32px;
 }
 
-.social-links a li {
+.footer__social__link {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  opacity: 0.12;
+  background: #fff;
 }
 
-.social-links a li img {
-  border: 1px solid transparent;
-  border-radius: 30px;
-  transition: transform 0.3s ease-in-out;
-}
-
-.social-links a li img:hover {
-  border-color: #f0f0f0;
-  transform: scale(1.15);
+.footer__social__img {
+  position: absolute;
+  top: 8px;
+  left: 8px;
 }

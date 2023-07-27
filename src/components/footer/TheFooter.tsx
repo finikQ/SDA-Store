@@ -62,18 +62,22 @@ const TheFooter = () => {
           </div>
           <div>ул. Примерная, 123</div>
           <div>
-            <ul className={styles["social-links"]}>
+            <ul className={styles.footer__social}>
               {socials.map((item): any => (
-                <Link key={item.name} href={item.href} target="_blank">
-                  <li>
-                    <Image
-                      src={item.img_src}
-                      alt={item.name}
-                      width={40}
-                      height={40}
-                    />
-                  </li>
-                </Link>
+                <li key={item.name} className={styles.footer__social__item}>
+                  <Image
+                    className={styles.footer__social__img}
+                    src={item.img_src}
+                    alt={item.name}
+                    width={16}
+                    height={16}
+                  />
+                  <Link
+                    className={styles.footer__social__link}
+                    href={item.href}
+                    target="_blank"
+                  />
+                </li>
               ))}
             </ul>
           </div>
