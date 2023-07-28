@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
+import "./reset.css";
 import styles from "./main.module.css";
 
 import { TheHeader } from "@/components/header/TheHeader";
