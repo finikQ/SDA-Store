@@ -1,67 +1,58 @@
-import Image from "next/image";
 import styles from "./page.module.css";
 
-export default function Home() {
+import MainSlider from "@/components/main/slider/MainSlider";
+import MainCarousel from "@/components/main/carousel/MainCarousel";
+import MainTopCategories from "@/components/main/top_categories/MainTopCategories";
+import MainBlog from "@/components/main/blog/MainBlog";
+
+async function getProducts() {
+  const response = await fetch("https://dummyjson.com/products");
+  return response.json();
+}
+export type typeSlides = {
+  title: string;
+  subtitle: string;
+  bg_img: string;
+  bg_img_alt: string;
+  btn_main: string;
+  btn_sub: string;
+};
+
+const slides: typeSlides[] = [
+  {
+    title: "Заголовок 1",
+    subtitle: "Подзаголовок 1",
+    bg_img: "/main/slider/1.jpg",
+    bg_img_alt: "Изображение инф",
+    btn_main: "Осн кнопка1",
+    btn_sub: "Доп кнопка1",
+  },
+  {
+    title: "Заголовок 2",
+    subtitle: "Подзаголовок 2",
+    bg_img: "/main/slider/2.jpg",
+    bg_img_alt: "Изображение инф",
+    btn_main: "Осн кнопка2",
+    btn_sub: "Доп кнопка2",
+  },
+  {
+    title: "Заголовок 3",
+    subtitle: "Подзаголовок 3",
+    bg_img: "/main/slider/3.jpg",
+    bg_img_alt: "Изображение инф",
+    btn_main: "Осн кнопка3",
+    btn_sub: "Доп кнопка3",
+  },
+];
+
+export default async function Home() {
+  let clothersList = await getProducts();
   return (
-    <div>
-      <div className={styles.top_slider_container}>
-        <ul className={styles.top_slider_list}>
-          <li className={styles.top_slider_item}>
-            <Image src="/main/slider/1.jpg" alt="На главную" layout="fill" />
-
-            <div className={styles.top_slider__info__wrapper}>
-              <div className={styles.top_slider__info}>
-                <div>
-                  <div className={styles.top_slider__info__subtitle}>
-                    Подзаголовок 1234
-                  </div>
-                  <h2 className={styles.top_slider__info__title}>
-                    Заголовок 1234
-                  </h2>
-                </div>
-                <div className={styles.top_slider_buttons}>
-                  <button className={styles.top_slider_buttons__sub}>
-                    <span>Доп кнопка</span>
-                  </button>
-                  <button className={styles.top_slider_buttons__main}>
-                    <span>Осн кнопка</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.top_slider__pager__wrapper}></div>
-          </li>
-
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
-
-        <div className={styles.top_slider__btn__wrapper}>
-          <div className={styles.top_slider__btn}>
-            <button className={styles.top_slider__btn__shape}>
-              <Image
-              className={styles.top_slider__btn__image}
-                src="/main/slider/Left.svg"
-                alt="На главную"
-                width={24}
-                height={24}
-              />
-            </button>
-            <button className={styles.top_slider__btn__shape}>
-              <Image
-              className={styles.top_slider__btn__image}
-                src="/main/slider/Right.svg"
-                alt="На главную"
-                width={24}
-                height={24}
-              />
-            </button>
-          </div>
-        </div>
-      </div>
+    <div className={styles.container}>
+      <MainSlider slides={slides} interval={5} />
+      <MainTopCategories />
+      <MainCarousel props={clothersList.products} />
+      <MainBlog />
     </div>
   );
 }

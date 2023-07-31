@@ -2,6 +2,12 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+
+  height: 100%;
+  max-width: 1920px;
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0 auto;
 }
 
 .layout__header {
