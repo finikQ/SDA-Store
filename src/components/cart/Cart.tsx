@@ -10,7 +10,7 @@ import { DeliveryOption } from "./DeliveryOption/DeliveryOption";
 import { PaymentOption } from "./PaymentOption/PaymentOption";
 
 export const Cart = () => {
-  const { products, totalPrice } = useSelector(
+  const { cart_products, cart_totalPrice } = useSelector(
     (state: RootState) => state.cartSlice.value
   );
 
@@ -37,11 +37,11 @@ export const Cart = () => {
         <div className={styles.cart__container}>
           <div className={styles.cart}>
             <div className={styles.products}>
-              {products.map((product) => (
+              {cart_products.map((product) => (
                 <CartItem key={product.id} product={product} />
               ))}
               <div className={styles.products__totalPrice}>
-                Общая сумма: {totalPrice} ₽
+                Общая сумма: {cart_totalPrice} ₽
               </div>
             </div>
             <DeliveryOption onCallback={handleCallback} />
@@ -57,7 +57,7 @@ export const Cart = () => {
                   <div className={styles.totalPrice__subTotal}>
                     <div className={styles.totalPrice__line}>
                       <div>Сумма:</div>
-                      <div>{totalPrice} ₽</div>
+                      <div>{cart_totalPrice} ₽</div>
                     </div>
                     <div className={styles.totalPrice__line}>
                       <div>{deliveryOption}:</div>
@@ -68,7 +68,7 @@ export const Cart = () => {
                 <div className={styles.totalPrice__finalTotal}>
                   <div className={styles.totalPrice__line}>
                     <div>Итоговая сумма: </div>
-                    <div>{totalPrice + deliveryPrice} ₽</div>
+                    <div>{cart_totalPrice + deliveryPrice} ₽</div>
                   </div>
                 </div>
               </div>

@@ -6,11 +6,11 @@ import { RootState } from "@/redux/store";
 import { typeCartItem } from "@/redux/features/cart-slice";
 
 export const CartCount = () => {
-  const { products } = useSelector(
+  const { cart_products } = useSelector(
     (state: RootState) => state.cartSlice.value,
-    (prev, curr) => prev.products === curr.products // Добавьте сравнение для products
+    (prev, curr) => prev.cart_products === curr.cart_products
   );
-  const totalCount = products.reduce(
+  const totalCount = cart_products.reduce(
     (sum: number, item: typeCartItem) => sum + (item.count ?? 0),
     0
   );

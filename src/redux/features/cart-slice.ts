@@ -3,8 +3,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type InitialState = {
   value: {
-    products: typeCartItem[];
-    totalPrice: number;
+    cart_products: typeCartItem[];
+    cart_totalPrice: number;
+    favorite_products: typeCartItem[];
   };
 };
 
@@ -27,8 +28,9 @@ export type typeCartItem = {
 
 const initialState = {
   value: {
-    products: [] as typeCartItem[],
-    totalPrice: 0,
+    cart_products: [] as typeCartItem[],
+    cart_totalPrice: 0,
+    favorite_products: [] as typeCartItem[],
   },
 } as InitialState;
 
@@ -37,7 +39,7 @@ export const cartSlice = createSlice({
   initialState: initialState,
   reducers: {
     addProduct: (state, action: PayloadAction<typeCartItem>) => {
-      const findItem = state.value.products.find(
+      const findItem = state.value.cart_products.find(
         (obj) => obj.id === action.payload.id
       );
 
@@ -46,14 +48,14 @@ export const cartSlice = createSlice({
           findItem.count++;
         }
       } else {
-        state.value.products.push({ ...action.payload, count: 1 });
+        state.value.cart_products.push({ ...action.payload, count: 1 });
       }
 
-      state.value.totalPrice = calcTotalPrice(state.value.products);
+      state.value.cart_totalPrice = calcTotalPrice(state.value.cart_products);
     },
 
     removeProduct: (state, action: PayloadAction<number>) => {
-      const findItem = state.value.products.find(
+      const findItem = state.value.cart_products.find(
         (obj) => obj.id === action.payload
       );
 
@@ -63,14 +65,14 @@ export const cartSlice = createSlice({
         }
       }
 
-      state.value.totalPrice = calcTotalPrice(state.value.products);
+      state.value.cart_totalPrice = calcTotalPrice(state.value.cart_products);
     },
 
     setProductCount: (
       state,
       action: PayloadAction<{ id: number; count: number }>
     ) => {
-      const findItem = state.value.products.find(
+      const findItem = state.value.cart_products.find(
         (obj) => obj.id === action.payload.id
       );
 
@@ -80,18 +82,34 @@ export const cartSlice = createSlice({
         }
       }
 
-      state.value.totalPrice = calcTotalPrice(state.value.products);
+      state.value.cart_totalPrice = calcTotalPrice(state.value.cart_products);
     },
 
     deleteProduct: (state, action: PayloadAction<number>) => {
-      state.value.products = state.value.products.filter(
+      state.value.cart_products = state.value.cart_products.filter(
         (item) => item.id !== action.payload
       );
 
-      state.value.totalPrice = calcTotalPrice(state.value.products);
+      state.value.cart_totalPrice = calcTotalPrice(state.value.cart_products);
     },
     clearProducts: (state) => {
-      state.value.products = [];
+      state.value.cart_products = [];
+    },
+
+    toggleFavorite: (state, action) => {
+      const findItem = state.value.favorite_products.find(
+        (obj) => obj.id === action.payload.id
+      );
+
+      if (findItem) {
+        if (findItem !== undefined) {
+          state.value.favorite_products = state.value.favorite_products.filter(
+            (item) => item.id !== action.payload.id
+          );
+        }
+      } else {
+        state.value.favorite_products.push({ ...action.payload });
+      }
     },
   },
 });
@@ -101,6 +119,7 @@ export const {
   removeProduct,
   setProductCount,
   deleteProduct,
+  toggleFavorite,
   clearProducts,
 } = cartSlice.actions;
 export default cartSlice.reducer;

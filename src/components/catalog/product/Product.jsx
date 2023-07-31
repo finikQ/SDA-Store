@@ -6,7 +6,7 @@ import Link from "next/link";
 import React from "react";
 import styles from "./product.module.css";
 
-import { addProduct } from "@/redux/features/cart-slice";
+import { addProduct, toggleFavorite } from "@/redux/features/cart-slice";
 import { useDispatch } from "react-redux";
 
 export const Product = ({ props }) => {
@@ -14,6 +14,10 @@ export const Product = ({ props }) => {
 
   const addProductHandler = () => {
     dispatch(addProduct(props));
+  };
+
+  const toggleFavoriteHandler = () => {
+    dispatch(toggleFavorite(props));
   };
 
   return (
@@ -43,7 +47,7 @@ export const Product = ({ props }) => {
       </div>
 
       <div className={styles.card__favorite__container}>
-        <div className={styles.card__favorite}>
+        <div onClick={toggleFavoriteHandler} className={styles.card__favorite}>
           <span className={styles.card__favorite__form} />
           <span className={styles.card__favorite__icon} />
         </div>
