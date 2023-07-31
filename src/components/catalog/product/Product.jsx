@@ -17,27 +17,36 @@ export const Product = ({ props }) => {
   };
 
   return (
-    <div key={props.id} className={styles.product}>
-      <Link href={`/clother/${props.id}`}>
+    <div key={props.id} className={styles.card}>
+      <Link className={styles.card__link} href={`/clother/${props.id}`}>
         <Image
+          className={styles.card__img}
           src={props.images[0]}
           alt={props.description}
           width={285}
           height={320}
-          layout="fixed"
         />
       </Link>
-      <div className={styles["card-body"]}>
-        <Link href={`/clother/${props.id}`}>{props.title}</Link>
+      <div className={styles.card__body}>
+        <Link className={styles.card__title} href={`/clother/${props.id}`}>
+          {props.title}
+        </Link>
+        <p className={styles.card__description}>{props.description}</p>
       </div>
 
-      <div className={styles["card-footer"]}>
-        <div>{props.price} ₽</div>
-        <button onClick={addProductHandler}>В Корзину</button>
+      <div className={styles.card__footer}>
+        <div className={styles.card__price}>{props.price} ₽</div>
+
+        <button className={styles.card__btn_tocart} onClick={addProductHandler}>
+          В Корзину
+        </button>
       </div>
 
-      <div className={styles["card-favorite"]}>
-        <span className={styles["heart-icon"]}></span>
+      <div className={styles.card__favorite__container}>
+        <div className={styles.card__favorite}>
+          <span className={styles.card__favorite__form} />
+          <span className={styles.card__favorite__icon} />
+        </div>
       </div>
     </div>
   );
