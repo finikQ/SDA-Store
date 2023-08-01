@@ -94,10 +94,11 @@
 .toolbar a span {
   text-align: center;
   min-width: 25px;
-  padding: 2px 4px;
+  padding: 1px 4px;
   border-radius: 4px;
-  background: var(--success, #03cea4);
+  background: #03cea4;
   color: white;
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 150%;
 }

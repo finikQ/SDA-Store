@@ -9,7 +9,7 @@ import styles from "./product.module.css";
 import { addProduct, toggleFavorite } from "@/redux/features/cart-slice";
 import { useDispatch } from "react-redux";
 
-export const Product = ({ props }) => {
+export const Product = ({ props, isFavorite }) => {
   const dispatch = useDispatch();
 
   const addProductHandler = () => {
@@ -46,10 +46,20 @@ export const Product = ({ props }) => {
         </button>
       </div>
 
-      <div className={styles.card__favorite__container}>
+      <div
+        className={`${styles.card__favorite__container} ${
+          isFavorite ? styles.card__favorite__container_visible : ""
+        }`}
+      >
         <div onClick={toggleFavoriteHandler} className={styles.card__favorite}>
           <span className={styles.card__favorite__form} />
-          <span className={styles.card__favorite__icon} />
+          <span
+            className={`${styles.card__favorite__icon} ${
+              isFavorite
+                ? styles.card__favorite__icon_full
+                : styles.card__favorite__icon_hollow
+            }`}
+          />
         </div>
       </div>
     </div>

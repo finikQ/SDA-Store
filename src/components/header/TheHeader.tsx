@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./theheader.module.css";
 import { CartCount } from "./cartCount";
+import { FavoriteCount } from "./favoriteCount";
 
 const TheHeader = () => {
   return (
@@ -26,12 +27,24 @@ const TheHeader = () => {
         </div>
 
         <div className={styles.toolbar}>
-          <Link href="#">
-            <Image src="/Profile.svg" alt="profile" width={20} height={20} />
+          <Link href="/account">
+            <Image
+              src="/account/Person.svg"
+              alt="profile"
+              width={20}
+              height={20}
+            />
           </Link>
-          <Link href="#">
-            <Image src="/heart.svg" alt="wishlist" width={20} height={20} />
-            <span>2</span>
+          <Link href="/account/wishlist">
+            <Image
+              src="/blackHollowHeart.svg"
+              alt="wishlist"
+              width={20}
+              height={20}
+            />
+            <span>
+              <FavoriteCount />
+            </span>
           </Link>
           <Link href="/cart">
             <Image src="/Cart.svg" alt="cart" width={20} height={20} />

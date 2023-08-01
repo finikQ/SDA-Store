@@ -135,6 +135,10 @@
   transition: opacity 0.3s ease-in-out;
 }
 
+.card__favorite__container_visible {
+  opacity: 1;
+}
+
 .card:hover .card__favorite__container,
 .card:hover .card__btn_tocart {
   opacity: 1;
@@ -162,7 +166,6 @@
   left: 8px;
   width: 16px;
   height: 16px;
-  background-image: url("/heart.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -170,6 +173,14 @@
   cursor: pointer;
 }
 
-.card__favorite:hover .card__favorite__icon {
-  background-image: url("/heartRed.svg");
+.card__favorite:hover .card__favorite__icon_hollow {
+  background-image: url("/redHollowHeart.svg");
+}
+
+.card__favorite__icon_hollow {
+  background-image: url("/blackHollowHeart.svg");
+}
+
+.card__favorite__icon_full {
+  background-image: url("/redFullHeart.svg");
 }
