@@ -7,6 +7,8 @@ import Link from "next/link";
 import Product from "@/components/catalog/product/Product";
 import { typeCartItem } from "@/redux/features/cart-slice";
 import styles from "./maincarousel.module.css";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 export const MainCarousel: React.FC<{ props: typeCartItem[] }> = ({
   props,
@@ -18,6 +20,12 @@ export const MainCarousel: React.FC<{ props: typeCartItem[] }> = ({
     setNewArrivalsPage(index * 1878);
   };
 
+  // FIXME: Временное решение, поскольку значение отсутствует в fake Rest api
+  const favorite_products = useSelector(
+    (state: RootState) => state.cartSlice.value.favorite_products
+  );
+
+  let isFavorite: boolean;
   return (
     <section className={styles.container}>
       <div className={styles.header}>
@@ -37,9 +45,12 @@ export const MainCarousel: React.FC<{ props: typeCartItem[] }> = ({
             style={{ transform: `translateX(-${newArrivalsPage}px)` }}
           >
             {props.map((product: any) => {
+              isFavorite = favorite_products.some(
+                (item) => item.id === product.id
+              );
               return (
                 <li key={product.id} className={styles.product_list__item}>
-                  <Product props={product} />
+                  <Product props={product} isFavorite={isFavorite} />
                 </li>
               );
             })}

@@ -1,28 +1,43 @@
 .card {
+  border-radius: 4px;
+  width: calc(100% / 3 - 30px);
+  max-width: 285px;
+  flex-grow: 1;
+  box-sizing: border-box;
+  position: relative;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transform-origin: center bottom;
+  will-change: transform;
+}
+
+.card__wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
-  border-radius: 10px;
-  max-width: 285px;
-  height: 444px;
-  flex-grow: 1;
-  box-sizing: border-box;
-  transition: box-shadow 0.3s ease-in-out;
 }
 
-.card:hover {
+.card:hover .card__wrapper {
   box-shadow: 0px 4px 4px -4px rgba(30, 33, 44, 0.05),
     0px 12px 10px -6px rgba(154, 156, 165, 0.08),
     0px 30px 24px -10px rgba(154, 156, 165, 0.1),
     0px 80px 80px -20px rgba(154, 156, 165, 0.16);
 }
 
+.card:hover .card__wrapper {
+  position: absolute;
+}
+
+.card:hover .card__link::before {
+  content: "";
+  position: absolute;
+  background-color: #fff;
+}
+
 .card__link {
   display: flex;
   justify-content: center;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 .card__img {
@@ -30,15 +45,19 @@
   max-height: 100%;
   object-fit: cover;
   object-position: center;
-  border-radius: 10px;
+  border-radius: 4px;
   transition: transform 0.3s ease-in-out;
   display: block;
   width: auto;
 }
 
 .card__body {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
-  padding: 11px 16px;
+  border-radius: 0 0 4px 4px;
+  padding: 16px;
+  gap: 8px;
 }
 
 .card__title {
@@ -75,11 +94,8 @@
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  gap: 5px;
   flex-grow: 0;
-
-  padding: 11px 16px;
-  border-radius: 0 0 12px 12px;
+  position: relative;
 }
 
 .card__price {
@@ -95,6 +111,8 @@
 }
 
 .card__btn_tocart {
+  position: absolute;
+  margin-top: 4px;
   padding: 0 16px;
   border-radius: 4px;
   background: #17696a;
@@ -109,11 +127,21 @@
 
   cursor: pointer;
   border: none;
-  transition: transform 0.3s ease, opacity 0.3s ease-in-out;
+  /* transform: translateY(20px); */
+  transition: transform 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.card:hover .card__btn_tocart {
+  position: static;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .card__btn_tocart:hover {
+  opacity: 1;
   background: #145c5d;
+  pointer-events: auto;
 }
 
 .card__btn_tocart:active {
@@ -142,6 +170,7 @@
 .card:hover .card__favorite__container,
 .card:hover .card__btn_tocart {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .card__favorite {
