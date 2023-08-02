@@ -3,13 +3,11 @@
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import styles from "./catalog.module.css";
-import { Product } from "./product/Product";
 import { typeCartItem } from "@/redux/features/cart-slice";
 import { Filters } from "./filters/Filters";
 import Image from "next/image";
 import Breadcrumb from "@/utils/Breadcrumb";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { ProductList } from "./product/ProductList";
 
 export const Catalog: React.FC<{ props: typeCartItem[] }> = ({ props }) => {
   const breadcrumbs = [
@@ -84,12 +82,6 @@ export const Catalog: React.FC<{ props: typeCartItem[] }> = ({ props }) => {
     });
   };
 
-  // FIXME: Временное решение, поскольку значение отсутствует в fake Rest api
-  const favorite_products = useSelector(
-    (state: RootState) => state.cartSlice.value.favorite_products
-  );
-
-  let isFavorite:boolean
   return (
     <div className={styles.catalog}>
       <div className={styles.breadcrumb__container}>
@@ -169,10 +161,7 @@ export const Catalog: React.FC<{ props: typeCartItem[] }> = ({ props }) => {
           <Filters props={props} filters={filters} setFilters={setFilters} />
         </div>
         <div className={styles.productList}>
-          {filteredProps.map((product:typeCartItem) => {
-            isFavorite = favorite_products.some(item => item.id === product.id);
-            return <Product key={product.id} props={product} isFavorite={isFavorite} />;
-          })}
+          <ProductList props={filteredProps} cardSize={"small"} />
         </div>
       </div>
     </div>

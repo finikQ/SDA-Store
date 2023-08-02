@@ -1,7 +1,7 @@
 .card {
   border-radius: 4px;
-  width: calc(100% / 3 - 30px);
-  max-width: 285px;
+  width: calc(100% / 2 - 30px);
+  max-width: 390px;
   flex-grow: 1;
   box-sizing: border-box;
   position: relative;
@@ -16,6 +16,10 @@
   justify-content: space-between;
 }
 
+.hover{
+  z-index: 5;
+}
+
 .card:hover .card__wrapper {
   box-shadow: 0px 4px 4px -4px rgba(30, 33, 44, 0.05),
     0px 12px 10px -6px rgba(154, 156, 165, 0.08),
@@ -25,12 +29,13 @@
 
 .card:hover .card__wrapper {
   position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-.card:hover .card__link::before {
-  content: "";
-  position: absolute;
-  background-color: #fff;
+.card:hover .card__btn_tocart{
+  display: block;
 }
 
 .card__link {
@@ -102,44 +107,32 @@
   display: flex;
   text-align: center;
   color: #1e212c;
-  font-size: 20px;
+  font-size: 24px;
   font-style: normal;
   font-weight: 700;
-  line-height: 130%;
+  line-height: 140%;
   white-space: nowrap;
   cursor: default;
 }
 
 .card__btn_tocart {
-  position: absolute;
-  margin-top: 4px;
-  padding: 0 16px;
+  display: none;
+  padding: 0 32px;
   border-radius: 4px;
   background: #17696a;
-  opacity: 0;
 
   color: #fff;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 32px;
+  line-height: 34px;
   letter-spacing: 0.5px;
 
   cursor: pointer;
   border: none;
-  /* transform: translateY(20px); */
-  transition: transform 0.3s ease-in-out;
-  pointer-events: none;
-}
-
-.card:hover .card__btn_tocart {
-  position: static;
-  opacity: 1;
-  pointer-events: auto;
 }
 
 .card__btn_tocart:hover {
-  opacity: 1;
   background: #145c5d;
   pointer-events: auto;
 }
@@ -167,8 +160,7 @@
   opacity: 1;
 }
 
-.card:hover .card__favorite__container,
-.card:hover .card__btn_tocart {
+.card:hover .card__favorite__container {
   opacity: 1;
   transform: translateY(0);
 }

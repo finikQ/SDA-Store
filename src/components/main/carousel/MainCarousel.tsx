@@ -4,11 +4,9 @@ import React from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 
-import Product from "@/components/catalog/product/Product";
 import { typeCartItem } from "@/redux/features/cart-slice";
 import styles from "./maincarousel.module.css";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { ProductList } from "@/components/catalog/product/ProductList";
 
 export const MainCarousel: React.FC<{ props: typeCartItem[] }> = ({
   props,
@@ -20,12 +18,6 @@ export const MainCarousel: React.FC<{ props: typeCartItem[] }> = ({
     setNewArrivalsPage(index * 1878);
   };
 
-  // FIXME: Временное решение, поскольку значение отсутствует в fake Rest api
-  const favorite_products = useSelector(
-    (state: RootState) => state.cartSlice.value.favorite_products
-  );
-
-  let isFavorite: boolean;
   return (
     <section className={styles.container}>
       <div className={styles.header}>
@@ -40,21 +32,12 @@ export const MainCarousel: React.FC<{ props: typeCartItem[] }> = ({
 
       <div className={styles.product_list__container}>
         <div className={styles.product_list__window}>
-          <ul
+          <div
             className={styles.product_list}
             style={{ transform: `translateX(-${newArrivalsPage}px)` }}
           >
-            {props.map((product: any) => {
-              isFavorite = favorite_products.some(
-                (item) => item.id === product.id
-              );
-              return (
-                <li key={product.id} className={styles.product_list__item}>
-                  <Product props={product} isFavorite={isFavorite} />
-                </li>
-              );
-            })}
-          </ul>
+            <ProductList props={props} cardSize={"small"} />
+          </div>
         </div>
 
         <div className={styles.product_list__pagination}>

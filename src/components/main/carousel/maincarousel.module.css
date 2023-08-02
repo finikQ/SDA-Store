@@ -63,14 +63,9 @@
   transition-timing-function: ease-in-out;
 }
 
-.product_list > li {
+.product_list > div {
   min-width: 285px;
   max-width: 285px;
-}
-
-.product_list__item {
-  display: flex;
-  width: 100%;
 }
 
 .product_list__pagination {
