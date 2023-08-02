@@ -98,7 +98,7 @@ export default function Media({ children }: { children: React.ReactNode }) {
               </Link>
             </div>
           </div>
-          <div>{children}</div>
+          {children}
         </div>
       </div>
     </>

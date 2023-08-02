@@ -1,4 +1,5 @@
+import Wishlist from "@/components/account/wishlist/Wishlist";
+
 export default function AccountWishlist() {
-    return <div>Wishlist</div>;
-  }
-  
+  return <Wishlist />;
+}
