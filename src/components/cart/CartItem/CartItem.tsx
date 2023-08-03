@@ -2,71 +2,53 @@
 
 import React from "react";
 import Image from "next/image";
-
-import { useDispatch } from "react-redux";
-import {
-  addProduct,
-  removeProduct,
-  deleteProduct,
-  setProductCount,
-} from "@/redux/features/cart-slice";
-import { typeCartItem } from "@/redux/features/cart-slice";
 import Link from "next/link";
 
+import { typeCartItem } from "@/redux/features/cart-slice";
 import styles from "./cartitem.module.css";
 
-type CartItemProps = {
-  product: typeCartItem;
-};
+export const CartItem: React.FC<{
+  props: typeCartItem;
+  isFavorite: boolean;
+  handlers: any;
+}> = ({ props, isFavorite, handlers }) => {
+  const {
+    addProductHandler,
+    removeProductHandler,
+    deleteProductHandler,
+    countChangeHandler,
+    toggleFavoriteHandler,
+  } = handlers;
 
-export const CartItem = ({ product }: CartItemProps) => {
-  const dispatch = useDispatch();
-
-  const addProductHandler = () => {
-    if ((product.count ?? 0) >= product.stock) {
-      const payload = {
-        id: product.id,
-        count: product.stock,
-      };
-      dispatch(setProductCount(payload));
-    } else {
-      dispatch(addProduct(product));
-    }
+  const handleAddProduct = () => {
+    addProductHandler(props);
   };
 
-  const removeProductHandler = () => {
-    if (product.count == 1) {
-    } else {
-      dispatch(removeProduct(product.id));
-    }
+  const handleToggleFavorite = () => {
+    toggleFavoriteHandler(props);
   };
 
-  const deleteProductHandler = () => {
-    dispatch(deleteProduct(product.id));
+  const handleRemoveProduct = () => {
+    removeProductHandler(props);
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = Number(event.target.value);
-    const payload = {
-      id: product.id,
-      count: 1,
-    };
-    if (inputValue >= 1) {
-      payload.count = inputValue > product.stock ? product.stock : inputValue;
-    }
-    dispatch(setProductCount(payload));
+  const handleProductDelete = () => {
+    deleteProductHandler(props);
   };
 
+  const handleCountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    countChangeHandler(props, event);
+  };
   return (
     <div className={styles.product__container}>
       <div className={styles.product}>
         <div
           className={`${styles.product__image_container} ${styles.product_position}`}
         >
-          <Link href={`/clother/${product.id}`}>
+          <Link href={`/clother/${props.id}`}>
             <Image
-              src={product.images[0]}
-              alt={product.description}
+              src={props.images[0]}
+              alt={props.description}
               width={100}
               height={100}
             />
@@ -74,36 +56,57 @@ export const CartItem = ({ product }: CartItemProps) => {
         </div>
 
         <div className={`${styles.product__info} ${styles.product_position}`}>
-          <Link href={`/clother/${product.id}`}>{product.title}</Link>
-          <div>{product.description}</div>
+          <Link href={`/clother/${props.id}`}>{props.title}</Link>
+          <div>{props.description}</div>
         </div>
 
         <div
           className={`${styles.product__count_wrapper} ${styles.product_position}`}
         >
           <div className={`${styles.product__count}`}>
-            <button onClick={removeProductHandler}></button>
+            <button onClick={handleRemoveProduct}></button>
             <input
               type="text"
               pattern="[0-9]*"
               inputMode="numeric"
-              max={product.stock}
-              value={product.count}
-              onChange={handleChange}
+              max={props.stock}
+              value={props.count}
+              onChange={handleCountChange}
             />
-            <button onClick={addProductHandler}></button>
+            <button onClick={handleAddProduct}></button>
           </div>
           <div className={`${styles.product__count_price}`}>
-            {product.price} ₽
+            {props.price} ₽
           </div>
         </div>
         <div className={styles.product__price}>
-          {product.price * (product.count ?? 1)} ₽
-          <div className={styles["item-actions"]}>
-            <button>
-              <Image src="/heart.svg" alt="favorites" width={20} height={20} />
+          {props.price * (props.count ?? 1)} ₽
+          <div className={styles.item_actions}>
+            <button
+              className={styles.item_actions__button}
+              onClick={handleToggleFavorite}
+            >
+              {isFavorite ? (
+                <Image
+                  className={styles.favorite}
+                  src="/redFullHeart.svg"
+                  alt="favorites"
+                  width={20}
+                  height={20}
+                />
+              ) : (
+                <Image
+                  src="/blackHollowHeart.svg"
+                  alt="favorites"
+                  width={20}
+                  height={20}
+                />
+              )}
             </button>
-            <button onClick={deleteProductHandler}>
+            <button
+              className={styles.item_actions__button}
+              onClick={handleProductDelete}
+            >
               <Image
                 src="/trash.svg"
                 alt="delete item"

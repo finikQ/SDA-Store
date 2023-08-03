@@ -4,6 +4,15 @@
   gap: 16px;
 }
 
+.subtitle {
+  margin-bottom: 24px;
+  color: #1e212c;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 130%;
+}
+
 .radio_group {
   display: flex;
   justify-content: space-around;

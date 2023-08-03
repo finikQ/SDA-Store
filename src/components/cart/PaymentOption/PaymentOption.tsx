@@ -17,7 +17,7 @@ export const PaymentOption: React.FC<PaymentOptionProps> = ({ onCallback }) => {
 
   return (
     <div className={styles["payment-option"]}>
-      <h2>Способ Оплаты</h2>
+      <h2 className={styles.subtitle}>3. Способ Оплаты</h2>
 
       <div className={styles.radio_group}>
         <div className={styles["radio-container"]}>

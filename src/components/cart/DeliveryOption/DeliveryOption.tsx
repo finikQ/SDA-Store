@@ -52,7 +52,6 @@ export const DeliveryOption: React.FC<DeliveryOptionProps> = ({
     contact_surname: "",
     contact_phone: "",
     contact_email: "",
-    contact_additionalInfo: "",
   });
   const handleContactInfoChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -74,7 +73,7 @@ export const DeliveryOption: React.FC<DeliveryOptionProps> = ({
   };
   return (
     <div className={styles.delivery_option}>
-      <h2>Способ Доставки</h2>
+      <h2 className={styles.subtitle}>2. Способ Доставки</h2>
       <div className={styles.radio_group}>
         <div className={styles["radio-container"]}>
           <input
@@ -135,14 +134,6 @@ export const DeliveryOption: React.FC<DeliveryOptionProps> = ({
             placeholder="Почта"
             name="contact_email"
             value={contactInfo.contact_email}
-            onChange={handleContactInfoChange}
-          />
-
-          <input
-            type="text"
-            placeholder="Комментарий"
-            name="contact_additionalInfo"
-            value={contactInfo.contact_additionalInfo}
             onChange={handleContactInfoChange}
           />
         </div>
@@ -206,14 +197,6 @@ export const DeliveryOption: React.FC<DeliveryOptionProps> = ({
           />
 
           <input type="date" placeholder="Дата доставки" />
-
-          <input
-            type="text"
-            placeholder="Комментарий"
-            name="contact_additionalInfo"
-            value={contactInfo.contact_additionalInfo}
-            onChange={handleContactInfoChange}
-          />
         </div>
       )}
     </div>

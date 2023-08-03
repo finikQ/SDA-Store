@@ -116,7 +116,7 @@
 .product__price {
   padding: 0 24px;
   color: #424551;
-  min-width: 90px;
+  min-width: 130px;
   text-align: right;
   font-size: 16px;
   font-style: normal;
@@ -125,13 +125,13 @@
   white-space: nowrap;
 }
 
-.item-actions {
+.item_actions {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
 }
 
-.item-actions button {
+.item_actions button {
   margin-top: 10px;
   right: 0px;
   border: 0px;
@@ -142,12 +142,17 @@
   cursor: pointer;
 }
 
-.product:hover .item-actions button {
+.product:hover .item_actions button {
   opacity: 0.5;
   visibility: visible;
 }
 
-.item-actions button:first-child:hover,
-.item-actions button:last-child:hover {
+.item_actions button:first-child:hover,
+.item_actions button:last-child:hover {
   opacity: 1;
+}
+
+.favorite {
+  opacity: 1;
+  visibility: visible;
 }

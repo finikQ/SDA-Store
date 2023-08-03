@@ -1,21 +1,55 @@
 "use client";
 
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { CartItem } from "./CartItem/CartItem";
-import Link from "next/link";
 import styles from "./cart.module.css";
 import { DeliveryOption } from "./DeliveryOption/DeliveryOption";
 import { PaymentOption } from "./PaymentOption/PaymentOption";
+import Image from "next/image";
+import Breadcrumb from "@/utils/Breadcrumb";
+import {
+  addProduct,
+  clearProducts,
+  deleteProduct,
+  removeProduct,
+  setProductCount,
+  toggleFavorite,
+  typeCartItem,
+} from "@/redux/features/cart-slice";
+import Link from "next/link";
 
 export const Cart = () => {
-  const { cart_products, cart_totalPrice } = useSelector(
+  const dispatch = useDispatch();
+  const breadcrumbs = [
+    {
+      title: (
+        <Image
+          src="/breadcrumbs/Home.svg"
+          alt="На главную"
+          width={16}
+          height={16}
+        />
+      ),
+      link: "/",
+    },
+    { title: "Корзина", link: "/cart" },
+  ];
+
+  // FIXME: favorite_products Временное решение, поскольку значение отсутствует в fake Rest api
+  const { cart_products, cart_totalPrice, favorite_products } = useSelector(
     (state: RootState) => state.cartSlice.value
   );
 
   const [deliveryOption, setDeliveryOption] = useState("Самовывоз");
   const [deliveryPrice, setDeliveryPrice] = useState(0);
+  const [addInfo, setAddInfoChange] = useState("");
+  const handleAddInfoChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setAddInfoChange(event.target.value);
+  };
 
   const handleCallback = (data: {
     deliveryOption: string;
@@ -27,25 +61,119 @@ export const Cart = () => {
 
   const handlePaymentOptionCallback = () => {};
 
+  const handlers = {
+    addProductHandler: (product: typeCartItem) => {
+      if ((product.count ?? 0) >= product.stock) {
+        const payload = {
+          id: product.id,
+          count: product.stock,
+        };
+        dispatch(setProductCount(payload));
+      } else {
+        dispatch(addProduct(product));
+      }
+    },
+
+    removeProductHandler: (product: typeCartItem) => {
+      if (product.count == 1) {
+      } else {
+        dispatch(removeProduct(product.id));
+      }
+    },
+
+    deleteProductHandler: (product: typeCartItem) => {
+      dispatch(deleteProduct(product.id));
+    },
+
+    countChangeHandler: (
+      proudct: typeCartItem,
+      event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+      const inputValue = Number(event.target.value);
+      const payload = {
+        id: proudct.id,
+        count: 1,
+      };
+      if (inputValue >= 1) {
+        payload.count = inputValue > proudct.stock ? proudct.stock : inputValue;
+      }
+      dispatch(setProductCount(payload));
+    },
+
+    toggleFavoriteHandler: (product: typeCartItem) => {
+      dispatch(toggleFavorite(product));
+    },
+  };
+
+  const handleSubmit = () => {
+    dispatch(clearProducts());
+  };
+
+  let isFavorite: boolean;
+
   return (
-    <div className={styles.cart__wrapper}>
-      {/* <div>Breadcrumb</div> */}
-      <div className={styles.container}>
-        <div className={styles.title}>
-          <h1>Корзина</h1>
+    <>
+      <div className={styles.breadcrumbs_container}>
+        <div className={styles.breadcrumbs_wrapper}>
+          <Breadcrumb breadcrumbs={breadcrumbs} />
         </div>
+      </div>
+
+      {cart_products.length > 0 ? (
         <div className={styles.cart__container}>
           <div className={styles.cart}>
-            <div className={styles.products}>
-              {cart_products.map((product) => (
-                <CartItem key={product.id} product={product} />
-              ))}
-              <div className={styles.products__totalPrice}>
-                Общая сумма: {cart_totalPrice} ₽
+            <section className={styles.cart__section}>
+              <div className={styles.cart__header}>
+                <h1 className={styles.title}>Корзина</h1>
+                <Link className={styles.link} href={"/clother"}>
+                  В Каталог
+                </Link>
               </div>
-            </div>
-            <DeliveryOption onCallback={handleCallback} />
-            <PaymentOption onCallback={handlePaymentOptionCallback} />
+            </section>
+
+            <section className={styles.cart__section}>
+              <h2 className={styles.subtitle}>1. Список товаров</h2>
+              <div className={styles.products}>
+                {cart_products.map((product) => {
+                  isFavorite = favorite_products.some(
+                    (item) => item.id === product.id
+                  );
+                  return (
+                    <CartItem
+                      key={product.id}
+                      props={product}
+                      isFavorite={isFavorite}
+                      handlers={handlers}
+                    />
+                  );
+                })}
+                <div className={styles.products__totalPrice}>
+                  Общая сумма: {cart_totalPrice} ₽
+                </div>
+              </div>
+            </section>
+
+            <section className={styles.cart__section}>
+              <DeliveryOption onCallback={handleCallback} />
+            </section>
+
+            <section className={styles.cart__section}>
+              <PaymentOption onCallback={handlePaymentOptionCallback} />
+            </section>
+
+            <section className={styles.cart__section}>
+              <h2 className={styles.subtitle}>4. Дополнительная Информация</h2>
+              <div>
+                <h4 className={styles.addInfo__label}>Заметки к заказу</h4>
+                <textarea
+                  className={styles.addInfo__input}
+                  placeholder="Дополнительная инофрмация к заказу"
+                  name="Дополнение к заказу"
+                  value={addInfo}
+                  onChange={handleAddInfoChange}
+                />
+              </div>
+            </section>
           </div>
           <div className={styles.totalPrice__container}>
             <div className={styles.totalPrice__wrapper}>
@@ -73,14 +201,41 @@ export const Cart = () => {
                 </div>
               </div>
               <div className={styles.totalPrice__ConfirmButton}>
-                <button tabIndex={0} aria-label="Оформить Заказ">
+                <button
+                  onClick={handleSubmit}
+                  tabIndex={0}
+                  aria-label="Оформить Заказ"
+                >
                   Оформить Заказ
                 </button>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
+            height: "100%",
+            width: "100%",
+            fontSize: "20px",
+            fontWeight: 700,
+          }}
+        >
+          <div>¯\_(ツ)_/¯</div>
+          <div>Тут пусто</div>
+          <Link
+            href={"/clother"}
+            style={{ textDecoration: "underline", fontSize: "30px" }}
+          >
+            {"> "}Каталог{" <"}
+          </Link>
+        </div>
+      )}
+    </>
   );
 };
