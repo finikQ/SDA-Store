@@ -2,7 +2,7 @@ import Breadcrumb from "@/utils/Breadcrumb";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
-import { FavoriteCount } from "@/components/header/favoriteCount";
+import { FavoriteCount } from "@/utils/favoriteCount";
 
 export default function Media({ children }: { children: React.ReactNode }) {
   const breadcrumbs = [
@@ -73,7 +73,7 @@ export default function Media({ children }: { children: React.ReactNode }) {
                 </div>
               </Link>
 
-              <Link href={"/#"}>
+              <Link href={"/account/recentlyviewed"}>
                 <div className={styles.menu__item}>
                   <Image
                     src="/account/Eyes.svg"

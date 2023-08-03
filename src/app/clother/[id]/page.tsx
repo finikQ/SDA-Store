@@ -1,7 +1,10 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Breadcrumb from "@/utils/Breadcrumb";
-import Images_gallery from "@/components/product/Images_gallery";
+import Images_gallery from "@/components/product/images_gallery/Images_gallery";
+import RecentlyViewedList from "@/utils/RecentlyViewedList";
+import { RecentlyViewed_Carousel } from "@/components/product/recentlyviewed_carousel/RecentlyViewed_Carousel";
+import { ProductCardButtons } from "@/components/product/buttons/ProductCardButtons";
 
 type Props = {
   params: {
@@ -44,7 +47,7 @@ export default async function Clother({ params: { id } }: Props) {
       <div className={styles.product_card__wrapper}>
         <Images_gallery product={product} />
         <div className={styles.product_card__info}>
-          <h1>{product.title}</h1>
+          <h1 className={styles.product_card__title}>{product.title}</h1>
           <div className={styles.product_card__price}>
             <div>{product.price} ₽</div>
             <s>
@@ -73,25 +76,11 @@ export default async function Clother({ params: { id } }: Props) {
               {<u>состояние</u>}
             </div>
           </div>
-
-          <div className={styles.product_card__buttons}>
-            <button className={styles.product_card__buttons__toCart}>
-              <Image
-                src="/catalog/product/cart.svg"
-                alt="Корзина"
-                width={15}
-                height={13.667}
-              />
-              <span>В Корзину</span>
-            </button>
-            <button className={styles.product_card__buttons__toFavorite}>
-              <Image src="/heart.svg" alt="Избранное" width={16} height={16} />
-
-              <span>Избранное</span>
-            </button>
-          </div>
+          <ProductCardButtons props={product} />
         </div>
       </div>
+      <RecentlyViewed_Carousel />
+      <RecentlyViewedList props={product} />
     </div>
   );
 }

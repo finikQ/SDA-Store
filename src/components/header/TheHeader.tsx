@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./theheader.module.css";
-import { CartCount } from "./cartCount";
-import { FavoriteCount } from "./favoriteCount";
+import { CartCount } from "@/utils/cartCount";
+import { FavoriteCount } from "@/utils/favoriteCount";
 
 const TheHeader = () => {
   return (
