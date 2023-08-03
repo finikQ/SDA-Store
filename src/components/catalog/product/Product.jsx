@@ -31,17 +31,17 @@ export const Product = ({ props, isFavorite, handlers, cardSize }) => {
 
   let styles = cardSize === "small" ? productSmall : productLarge;
 
-  let heightBlock = hover ? heightRef.current.clientHeight : null;
+  let heightBlock = hover ? heightRef.current.clientHeight : 561.59;
   return (
     <div
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
       key={props.id}
-      className={styles.card}
+      className={`${styles.card} ${hover ? styles.hover : ""}`}
       ref={heightRef}
       style={hover ? { height: heightBlock } : {}}
     >
-      <div className={`${styles.card__wrapper} ${hover ? styles.hover : ""}`}>
+      <div className={`${styles.card__wrapper} `}>
         <Link className={styles.card__link} href={`/clother/${props.id}`}>
           {cardSize === "small" ? (
             <Image
@@ -70,13 +70,19 @@ export const Product = ({ props, isFavorite, handlers, cardSize }) => {
           </div>
           <div className={styles.card__footer}>
             <div className={styles.card__price}>{props.price} ₽</div>
-            <button
-              className={styles.card__btn_tocart}
-              onClick={handleAddProduct}
-            >
-              В Корзину
-            </button>
           </div>
+          <button
+            className={styles.card__btn_tocart}
+            onClick={handleAddProduct}
+          >
+            <Image
+              src="/catalog/product/cart.svg"
+              alt="Корзина"
+              width={15}
+              height={13.667}
+            />
+            <span>В Корзину</span>
+          </button>
         </div>
 
         <div
