@@ -1,0 +1,44 @@
+.wrapper {
+  background: #e5e8ed;
+  margin-top: 100px;
+  padding: 80px 0px 100px;
+}
+
+.container {
+  max-width: 1230px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__title {
+  color: #1e212c;
+  font-size: 46px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 130%;
+}
+
+.header__buttons {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+}
+
+.header__button {
+  border: none;
+  background-color: none;
+  background: none;
+  cursor: pointer;
+}
+
+.body {
+  margin-top: 60px;
+  min-height: 436px;
+  display: flex;
+  gap: 30px;
+}

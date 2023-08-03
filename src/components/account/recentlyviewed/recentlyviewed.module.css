@@ -1,0 +1,39 @@
+.wishlist {
+    width: 100%;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  
+  .header__naming {
+    color: #1e212c;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 130%;
+  }
+  
+  .header__button {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    color: #ff4242;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 160%;
+    cursor: pointer;
+  }
+  
+  .product__list {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 30px;
+  }
+  

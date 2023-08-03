@@ -6,6 +6,7 @@ export type InitialState = {
     cart_products: typeCartItem[];
     cart_totalPrice: number;
     favorite_products: typeCartItem[];
+    recentlyViewed_products: typeCartItem[];
   };
 };
 
@@ -31,6 +32,7 @@ const initialState = {
     cart_products: [] as typeCartItem[],
     cart_totalPrice: 0,
     favorite_products: [] as typeCartItem[],
+    recentlyViewed_products: [] as typeCartItem[],
   },
 } as InitialState;
 
@@ -115,6 +117,27 @@ export const cartSlice = createSlice({
     clearFavorites: (state) => {
       state.value.favorite_products = [];
     },
+
+    addRecentlyViewed: (state, action) => {
+      const findItem = state.value.recentlyViewed_products.find(
+        (obj) => obj.id === action.payload.id
+      );
+
+      if (findItem) {
+        if (findItem !== undefined) {
+          state.value.recentlyViewed_products =
+            state.value.recentlyViewed_products.filter(
+              (item) => item.id !== action.payload.id
+            );
+        }
+      }
+
+      if (state.value.recentlyViewed_products.length > 20) {
+        state.value.recentlyViewed_products.shift();
+      }
+
+      state.value.recentlyViewed_products.push({ ...action.payload });
+    },
   },
 });
 
@@ -126,5 +149,6 @@ export const {
   toggleFavorite,
   clearProducts,
   clearFavorites,
+  addRecentlyViewed,
 } = cartSlice.actions;
 export default cartSlice.reducer;
