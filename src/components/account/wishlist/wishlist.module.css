@@ -1,4 +1,5 @@
-.wishlist{
+.wishlist {
+  width: 100%;
 }
 
 .header {
@@ -16,6 +17,8 @@
 }
 
 .header__button {
+  display: flex;
+  align-items: center;
   background: none;
   border: none;
   color: #ff4242;
@@ -26,10 +29,10 @@
   cursor: pointer;
 }
 
-.product__list{
-    margin-top: 40px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 30px;
+.product__list {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 30px;
 }

@@ -111,6 +111,10 @@ export const cartSlice = createSlice({
         state.value.favorite_products.push({ ...action.payload });
       }
     },
+
+    clearFavorites: (state) => {
+      state.value.favorite_products = [];
+    },
   },
 });
 
@@ -121,5 +125,6 @@ export const {
   deleteProduct,
   toggleFavorite,
   clearProducts,
+  clearFavorites,
 } = cartSlice.actions;
 export default cartSlice.reducer;
