@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import styles from "./catalog.module.css";
 import { typeCartItem } from "@/redux/features/cart-slice";
 import { Filters } from "./filters/Filters";
@@ -25,6 +25,10 @@ export const Catalog: React.FC<{ props: typeCartItem[] }> = ({ props }) => {
     { title: "Каталог", link: "/clother" },
   ];
 
+  const priceSet: Array<number> = useMemo(
+    () => props.map((item) => item.price),
+    [props]
+  );
   const [filters, setFilters] = useState<{
     brands: string[];
     minPrice: number;
@@ -32,8 +36,8 @@ export const Catalog: React.FC<{ props: typeCartItem[] }> = ({ props }) => {
     sizes: string[];
   }>({
     brands: [],
-    minPrice: 0,
-    maxPrice: 100000,
+    minPrice: Math.min(...priceSet),
+    maxPrice: Math.max(...priceSet),
     sizes: [],
   });
 
@@ -46,16 +50,6 @@ export const Catalog: React.FC<{ props: typeCartItem[] }> = ({ props }) => {
       filters.sizes.length === 0 || filters.sizes.includes(product.category);
     return brandFilter && priceFilter && sizeFilter;
   });
-
-  useEffect(() => {
-    let priceSet: Array<number> = filteredProps.map((item) => item.price);
-    setFilters((prevState: any) => ({
-      ...prevState,
-      minPrice: Math.min.apply(null, priceSet),
-      maxPrice: Math.max.apply(null, priceSet),
-    }));
-  }, []);
-  let priceSet: Array<number> = props.map((item) => item.price);
 
   const clearBrandFilter = () => {
     setFilters({ ...filters, brands: [] });
@@ -157,7 +151,7 @@ export const Catalog: React.FC<{ props: typeCartItem[] }> = ({ props }) => {
 
       {/* <div className={styles.toolbar}>paggination</div> */}
       <div className={styles.mainWrapper}>
-        <div className={styles.filterList}>
+        <div>
           <Filters props={props} filters={filters} setFilters={setFilters} />
         </div>
         <div className={styles.productList}>

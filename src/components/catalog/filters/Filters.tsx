@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./filters.module.css";
 import { typeCartItem } from "@/redux/features/cart-slice";
 import Image from "next/image";
@@ -39,11 +39,19 @@ export const Filters: React.FC<{
   };
 
   const handleMinPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFilters({ ...filters, minPrice: Number(event.target.value) });
+    const inputValue = event.target.value;
+    const minPrice = parseInt(inputValue);
+    if (!isNaN(minPrice)) {
+      setFilters({ ...filters, minPrice });
+    }
   };
 
   const handleMaxPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFilters({ ...filters, maxPrice: Number(event.target.value) });
+    const inputValue = event.target.value;
+    const maxPrice = parseInt(inputValue);
+    if (!isNaN(maxPrice)) {
+      setFilters({ ...filters, maxPrice });
+    }
   };
 
   let brandSet: Set<string> = new Set(props.map((item) => item.brand));
@@ -52,31 +60,27 @@ export const Filters: React.FC<{
   return (
     <>
       <aside className={styles.filters__list}>
-        <div className={styles.filters__filter}>
+        <section className={styles.filters__filter}>
           <button
             className={styles.filters__filter__expand_btn}
             onClick={handleShowBrands}
           >
             <div className={styles.filters__filter__name}>Бренд</div>
-            <div>
-              {visibleFilter.visibleBrands ? (
-                <Image
-                  src="/catalog/filter/minus.svg"
-                  alt="Убрать фильтр цены"
-                  width={16}
-                  height={16}
-                />
-              ) : (
-                <Image
-                  src="/catalog/filter/plus.svg"
-                  alt="Убрать фильтр цены"
-                  width={16}
-                  height={16}
-                />
-              )}
-            </div>
+            <Image
+              src={
+                visibleFilter.visibleBrands
+                  ? "/catalog/filter/minus.svg"
+                  : "/catalog/filter/plus.svg"
+              }
+              alt={
+                visibleFilter.visibleBrands
+                  ? "Скрыть фильтр Производитель"
+                  : "Открыть фильтр Производитель"
+              }
+              width={16}
+              height={16}
+            />
           </button>
-
           <div
             className={` ${
               visibleFilter.visibleBrands
@@ -106,23 +110,21 @@ export const Filters: React.FC<{
                     }}
                   >
                     <div>
-                      {filters.brands.includes(mapItem) ? (
-                        <Image
-                          src="/catalog/filter/checked.svg"
-                          width={16}
-                          height={16}
-                          alt="checked"
-                          className={styles.checked_image}
-                        />
-                      ) : (
-                        <Image
-                          src="/catalog/filter/unchecked.svg"
-                          width={16}
-                          height={16}
-                          alt="unchecked"
-                          className={styles.checked_image}
-                        />
-                      )}
+                      <Image
+                        src={
+                          filters.brands.includes(mapItem)
+                            ? "/catalog/filter/checked.svg"
+                            : "/catalog/filter/unchecked.svg"
+                        }
+                        width={16}
+                        height={16}
+                        alt={
+                          filters.brands.includes(mapItem)
+                            ? "checked"
+                            : "unchecked"
+                        }
+                        className={styles.checked_image}
+                      />
                     </div>
                     <div className={styles.filters__filter__category_name}>
                       {mapItem}
@@ -132,33 +134,29 @@ export const Filters: React.FC<{
               ))}
             </ul>
           </div>
-        </div>
+        </section>
 
-        <div className={styles.filters__filter}>
+        <section className={styles.filters__filter}>
           <button
             className={styles.filters__filter__expand_btn}
             onClick={handleShowPrices}
           >
             <div className={styles.filters__filter__name}>Цена</div>
-            <div>
-              {visibleFilter.visiblePrices ? (
-                <Image
-                  src="/catalog/filter/minus.svg"
-                  alt="Убрать фильтр цены"
-                  width={16}
-                  height={16}
-                />
-              ) : (
-                <Image
-                  src="/catalog/filter/plus.svg"
-                  alt="Убрать фильтр цены"
-                  width={16}
-                  height={16}
-                />
-              )}
-            </div>
+            <Image
+              src={
+                visibleFilter.visiblePrices
+                  ? "/catalog/filter/minus.svg"
+                  : "/catalog/filter/plus.svg"
+              }
+              alt={
+                visibleFilter.visiblePrices
+                  ? "Открыть фильтр цены"
+                  : "Скрыть фильтр цены"
+              }
+              width={16}
+              height={16}
+            />
           </button>
-
           <div
             className={`${styles.filters__filter__numbers} ${
               visibleFilter.visiblePrices === false
@@ -182,33 +180,29 @@ export const Filters: React.FC<{
               onChange={handleMaxPriceChange}
             />
           </div>
-        </div>
+        </section>
 
-        <div className={styles.filters__filter}>
+        <section className={styles.filters__filter}>
           <button
             className={styles.filters__filter__expand_btn}
             onClick={handleShowSizes}
           >
             <div className={styles.filters__filter__name}>Размер</div>
-            <div>
-              {visibleFilter.visibleSizes ? (
-                <Image
-                  src="/catalog/filter/minus.svg"
-                  alt="Убрать фильтр цены"
-                  width={16}
-                  height={16}
-                />
-              ) : (
-                <Image
-                  src="/catalog/filter/plus.svg"
-                  alt="Убрать фильтр цены"
-                  width={16}
-                  height={16}
-                />
-              )}
-            </div>
+            <Image
+              src={
+                visibleFilter.visibleSizes
+                  ? "/catalog/filter/minus.svg"
+                  : "/catalog/filter/plus.svg"
+              }
+              alt={
+                visibleFilter.visibleSizes
+                  ? "Скрыть фильтр размеров"
+                  : "Открыть фильтр размеров"
+              }
+              width={16}
+              height={16}
+            />
           </button>
-
           <div
             className={` ${
               visibleFilter.visibleSizes
@@ -238,23 +232,21 @@ export const Filters: React.FC<{
                     }}
                   >
                     <div>
-                      {filters.sizes.includes(mapItem) ? (
-                        <Image
-                          src="/catalog/filter/checked.svg"
-                          width={16}
-                          height={16}
-                          alt="checked"
-                          className={styles.checked_image}
-                        />
-                      ) : (
-                        <Image
-                          src="/catalog/filter/unchecked.svg"
-                          width={16}
-                          height={16}
-                          alt="unchecked"
-                          className={styles.checked_image}
-                        />
-                      )}
+                      <Image
+                        src={
+                          filters.sizes.includes(mapItem)
+                            ? "/catalog/filter/checked.svg"
+                            : "/catalog/filter/unchecked.svg"
+                        }
+                        width={16}
+                        height={16}
+                        alt={
+                          filters.sizes.includes(mapItem)
+                            ? "checked"
+                            : "unchecked"
+                        }
+                        className={styles.checked_image}
+                      />
                     </div>
                     <div className={styles.filters__filter__category_name}>
                       {mapItem}
@@ -264,7 +256,7 @@ export const Filters: React.FC<{
               ))}
             </ul>
           </div>
-        </div>
+        </section>
       </aside>
     </>
   );

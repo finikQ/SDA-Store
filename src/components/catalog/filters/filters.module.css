@@ -4,6 +4,12 @@
   width: 255px; /* TODO: Пофиксить ширину */
   max-width: 255px;
   flex-grow: 1;
+
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  top: 32px;
+  position: sticky;
 }
 
 .filters__filter {
@@ -87,12 +93,14 @@
   gap: 12px;
 }
 
-.filter__close {
-  display: none;
+.filter__open {
+  max-height: 1000px;
 }
 
-.filter__open {
-  display: flex;
+.filter__close {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
 }
 
 .filters__filter__category_name {
