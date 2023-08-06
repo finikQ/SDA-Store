@@ -32,8 +32,7 @@ const TheFooter = () => {
         <div>
           <h3>Каталог</h3>
           <Link href="/new">Новинки</Link>
-          <Link href="/clother">Одежда</Link>
-          <Link href="/accessories">Аксессуары</Link>
+          <Link href="/catalog">Каталог</Link>
           <Link href="/brands">Бренды</Link>
           <Link href="/media">Медиа</Link>
         </div>

@@ -12,7 +12,7 @@ export const RecentlyViewed: React.FC<{}> = () => {
   const recentlyViewedProducts = useSelector(
     (state: RootState) => state.cartSlice.value.recentlyViewed_products
   );
-  const products = [...recentlyViewedProducts].reverse()
+  const products = [...recentlyViewedProducts].reverse();
 
   return (
     <>
@@ -44,7 +44,7 @@ export const RecentlyViewed: React.FC<{}> = () => {
             <div>¯\_(ツ)_/¯</div>
             <div>Тут пусто</div>
             <Link
-              href={"/clother"}
+              href={"/catalog"}
               style={{ textDecoration: "underline", fontSize: "30px" }}
             >
               {"> "}Каталог{" <"}

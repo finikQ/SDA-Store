@@ -42,7 +42,7 @@ export const Product = ({ props, isFavorite, handlers, cardSize }) => {
       style={hover ? { height: heightBlock } : {}}
     >
       <div className={`${styles.card__wrapper} `}>
-        <Link className={styles.card__link} href={`/clother/${props.id}`}>
+        <Link className={styles.card__link} href={`/catalog/${props.id}`}>
           {cardSize === "small" ? (
             <Image
               className={styles.card__img}
@@ -63,7 +63,7 @@ export const Product = ({ props, isFavorite, handlers, cardSize }) => {
         </Link>
         <div className={styles.card__body}>
           <div>
-            <Link className={styles.card__title} href={`/clother/${props.id}`}>
+            <Link className={styles.card__title} href={`/catalog/${props.id}`}>
               {props.title}
             </Link>
             <p className={styles.card__description}>{props.description}</p>

@@ -45,7 +45,7 @@ export const CartItem: React.FC<{
         <div
           className={`${styles.product__image_container} ${styles.product_position}`}
         >
-          <Link href={`/clother/${props.id}`}>
+          <Link href={`/catalog/${props.id}`}>
             <Image
               src={props.images[0]}
               alt={props.description}
@@ -56,7 +56,7 @@ export const CartItem: React.FC<{
         </div>
 
         <div className={`${styles.product__info} ${styles.product_position}`}>
-          <Link href={`/clother/${props.id}`}>{props.title}</Link>
+          <Link href={`/catalog/${props.id}`}>{props.title}</Link>
           <div>{props.description}</div>
         </div>
 

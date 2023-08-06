@@ -229,7 +229,7 @@ export const Cart = () => {
           <div>¯\_(ツ)_/¯</div>
           <div>Тут пусто</div>
           <Link
-            href={"/clother"}
+            href={"/catalog"}
             style={{ textDecoration: "underline", fontSize: "30px" }}
           >
             {"> "}Каталог{" <"}

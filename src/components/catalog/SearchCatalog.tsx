@@ -1,34 +1,26 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "./catalog.module.css";
 import { typeCartItem } from "@/redux/features/cart-slice";
 import { Filters } from "./filters/Filters";
 import Image from "next/image";
 import Breadcrumb from "@/utils/Breadcrumb";
 import { ProductList } from "./product/ProductList";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
-export const Catalog: React.FC<{
-  props: typeCartItem[];
-  priceRange: { minPriceDefault: number; maxPriceDefault: number };
-}> = ({ props, priceRange }) => {
-  const [filteredProducts, setFilteredProducts] = useState<typeCartItem[]>([]);
+async function getProductsSearch(search: string) {
+  const serverUrl = process.env.SERVER_URL || "";
+  const response = await fetch(
+    `${serverUrl}/api/products/search?query=${search}`
+  );
+  const data = await response.json();
+  return data;
+}
 
-  const { minPriceDefault, maxPriceDefault } = priceRange;
-
-  const [filters, setFilters] = useState<{
-    brands: string[];
-    minPrice: number;
-    maxPrice: number;
-    sizes: string[];
-  }>({
-    brands: [],
-    minPrice: minPriceDefault,
-    maxPrice: maxPriceDefault,
-    sizes: [],
-  });
-
+export const SearchCatalog: React.FC<{}> = ({}) => {
   const breadcrumbs = [
     {
       title: (
@@ -44,8 +36,40 @@ export const Catalog: React.FC<{
     { title: "Каталог", link: "/catalog" },
   ];
 
+  const searchParams = useSearchParams();
+  const search = searchParams.get("query");
+  const [products, setProducts] = useState<typeCartItem[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<typeCartItem[]>([]);
+
+  const priceSet: Array<number> = useMemo(
+    () => products.map((item) => item.price),
+    [products]
+  );
+  const [filters, setFilters] = useState<{
+    brands: string[];
+    minPrice: number;
+    maxPrice: number;
+    sizes: string[];
+  }>({
+    brands: [],
+    minPrice: 0,
+    maxPrice: 100000,
+    sizes: [],
+  });
+
   useEffect(() => {
-    let filteredProps: typeCartItem[] = props.filter((product) => {
+    if (search) {
+      const fetchData = async () => {
+        let fetchedProducts: typeCartItem[];
+        fetchedProducts = await getProductsSearch(search);
+        setProducts(fetchedProducts);
+      };
+      fetchData();
+    }
+  }, [search]);
+
+  useEffect(() => {
+    let filteredProps: typeCartItem[] = products.filter((product) => {
       const brandFilter =
         filters.brands.length === 0 || filters.brands.includes(product.brand);
       const priceFilter =
@@ -56,7 +80,7 @@ export const Catalog: React.FC<{
     });
 
     setFilteredProducts(filteredProps);
-  }, [props, filters]);
+  }, [filters, products]);
 
   const clearBrandFilter = () => {
     setFilters({ ...filters, brands: [] });
@@ -65,8 +89,8 @@ export const Catalog: React.FC<{
   const clearPriceFilter = () => {
     setFilters({
       ...filters,
-      minPrice: minPriceDefault,
-      maxPrice: maxPriceDefault,
+      minPrice: Math.min.apply(null, priceSet),
+      maxPrice: Math.max.apply(null, priceSet),
     });
   };
 
@@ -77,11 +101,13 @@ export const Catalog: React.FC<{
   const clearAllFilters = () => {
     setFilters({
       brands: [],
-      minPrice: minPriceDefault,
-      maxPrice: maxPriceDefault,
+      minPrice: Math.min.apply(null, priceSet),
+      maxPrice: Math.max.apply(null, priceSet),
       sizes: [],
     });
   };
+
+  console.log(products.length);
 
   return (
     <div className={styles.catalog}>
@@ -104,8 +130,7 @@ export const Catalog: React.FC<{
               </button>
             ) : null}
 
-            {filters.minPrice != minPriceDefault ||
-            filters.maxPrice != maxPriceDefault ? (
+            {filters.minPrice != 0 || filters.maxPrice != 100000 ? (
               <button
                 className={styles.activeFilters}
                 onClick={clearPriceFilter}
@@ -136,8 +161,8 @@ export const Catalog: React.FC<{
             ) : null}
 
             {filters.brands.length > 0 ||
-            filters.minPrice != minPriceDefault ||
-            filters.maxPrice != maxPriceDefault ||
+            filters.minPrice != 0 ||
+            filters.maxPrice != 100000 ||
             filters.sizes.length > 0 ? (
               <button
                 className={styles.activeFilters}
@@ -157,16 +182,48 @@ export const Catalog: React.FC<{
       </div>
 
       {/* <div className={styles.toolbar}>paggination</div> */}
-      <div className={styles.mainWrapper}>
-        <div>
-          <Filters props={props} filters={filters} setFilters={setFilters} />
+
+      {products.length == 0 ? (
+        <div className={styles.wishlist}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px",
+              height: "100%",
+              width: "100%",
+              fontSize: "20px",
+              fontWeight: 700,
+            }}
+          >
+            <div>¯\_(ツ)_/¯</div>
+            <div>Тут пусто</div>
+            <Link
+              href={"/catalog"}
+              style={{ textDecoration: "underline", fontSize: "30px" }}
+            >
+              {"> "}Каталог{" <"}
+            </Link>
+          </div>
         </div>
-        <div className={styles.productList}>
-          <ProductList props={filteredProducts} cardSize={"small"} />
+      ) : (
+        <div className={styles.mainWrapper}>
+          <div>
+            <Filters
+              props={products}
+              filters={filters}
+              setFilters={setFilters}
+            />
+          </div>
+          <div className={styles.productList}>
+            <ProductList props={filteredProducts} cardSize={"small"} />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
 
-export default dynamic(() => Promise.resolve(Catalog), { ssr: false });
+export default dynamic(() => Promise.resolve(SearchCatalog), { ssr: false });

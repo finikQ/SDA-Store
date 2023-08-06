@@ -3,6 +3,7 @@ import Link from "next/link";
 import styles from "./theheader.module.css";
 import { CartCount } from "@/utils/cartCount";
 import { FavoriteCount } from "@/utils/favoriteCount";
+import { Search } from "./search/Search";
 
 const TheHeader = () => {
   return (
@@ -15,16 +16,11 @@ const TheHeader = () => {
         </div>
         <nav className={styles.menu}>
           <Link href="/new">Новинки</Link>
-          <Link href="/clother">Одежда</Link>
-          <Link href="/accessories">Аксессуары</Link>
+          <Link href="/catalog">Каталог</Link>
           <Link href="/brands">Бренды</Link>
           <Link href="/media">Медиа</Link>
         </nav>
-        <div className={styles.search}>
-          <form>
-            <input placeholder="Найти"></input>
-          </form>
-        </div>
+        <Search />
 
         <div className={styles.toolbar}>
           <Link href="/account">
