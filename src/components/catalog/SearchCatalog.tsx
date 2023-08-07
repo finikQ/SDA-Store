@@ -11,13 +11,27 @@ import { ProductList } from "./product/ProductList";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-async function getProductsSearch(search: string) {
+async function getProductsSearch(search: string, setIsEmptyRes: any) {
   const serverUrl = process.env.SERVER_URL || "";
   const response = await fetch(
     `${serverUrl}/api/products/search?query=${search}`
   );
-  const data = await response.json();
+  let data = await response.json();
+
+  if (data.length == 0) {
+    setIsEmptyRes(true);
+    const response = await fetch("https://dummyjson.com/products");
+    data = await response.json();
+    return data.products;
+  } else {
+    setIsEmptyRes(false);
+  }
   return data;
+}
+
+async function getProducts() {
+  const response = await fetch("https://dummyjson.com/products");
+  return response.json();
 }
 
 export const SearchCatalog: React.FC<{}> = ({}) => {
@@ -35,6 +49,9 @@ export const SearchCatalog: React.FC<{}> = ({}) => {
     },
     { title: "Каталог", link: "/catalog" },
   ];
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isEmptyRes, setIsEmptyRes] = useState<boolean>(false);
 
   const searchParams = useSearchParams();
   const search = searchParams.get("query");
@@ -61,8 +78,9 @@ export const SearchCatalog: React.FC<{}> = ({}) => {
     if (search) {
       const fetchData = async () => {
         let fetchedProducts: typeCartItem[];
-        fetchedProducts = await getProductsSearch(search);
+        fetchedProducts = await getProductsSearch(search, setIsEmptyRes);
         setProducts(fetchedProducts);
+        setIsLoading(false);
       };
       fetchData();
     }
@@ -106,8 +124,6 @@ export const SearchCatalog: React.FC<{}> = ({}) => {
       sizes: [],
     });
   };
-
-  console.log(products.length);
 
   return (
     <div className={styles.catalog}>
@@ -182,8 +198,54 @@ export const SearchCatalog: React.FC<{}> = ({}) => {
       </div>
 
       {/* <div className={styles.toolbar}>paggination</div> */}
-
-      {products.length == 0 ? (
+      {isEmptyRes && (
+        <div className={styles.wishlist}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px",
+              height: "100%",
+              width: "100%",
+              fontSize: "20px",
+              fontWeight: 700,
+            }}
+          >
+            <div
+              style={{
+                margin: "30px 0 0 0",
+              }}
+            >
+              По вашему запросу товаров сейчас нет ¯\_(ツ)_/¯
+            </div>
+            <div
+              style={{
+                margin: "30px 0 0 0",
+              }}
+            >
+              ✿ Популярные товары, присмотритесь ✿
+            </div>
+          </div>
+        </div>
+      )}
+      {isLoading ? (
+        <div className={styles.fetching}></div>
+      ) : products.length !== 0 ? (
+        <div className={styles.mainWrapper}>
+          <div>
+            <Filters
+              props={products}
+              filters={filters}
+              setFilters={setFilters}
+            />
+          </div>
+          <div className={styles.productList}>
+            <ProductList props={filteredProducts} cardSize={"small"} />
+          </div>
+        </div>
+      ) : (
         <div className={styles.wishlist}>
           <div
             style={{
@@ -206,19 +268,6 @@ export const SearchCatalog: React.FC<{}> = ({}) => {
             >
               {"> "}Каталог{" <"}
             </Link>
-          </div>
-        </div>
-      ) : (
-        <div className={styles.mainWrapper}>
-          <div>
-            <Filters
-              props={products}
-              filters={filters}
-              setFilters={setFilters}
-            />
-          </div>
-          <div className={styles.productList}>
-            <ProductList props={filteredProducts} cardSize={"small"} />
           </div>
         </div>
       )}
