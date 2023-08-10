@@ -14,16 +14,19 @@ export type typeCartItem = {
   id: number;
   title: string;
   description: string;
-  price: number;
-
   brand: string;
+  category: string;
+  size: string;
+  price: number;
+  priceBeforeDiscount: number;
+  condition: string;
+  stock: number;
+  ProductionYear: string | number;
+  ManufacturerCountry: string;
+  Material: string;
   thumbnail: string;
   images: string[];
 
-  category: string;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
   count?: number;
 };
 

@@ -10,8 +10,12 @@ import Breadcrumb from "@/utils/Breadcrumb";
 import { ProductList } from "./product/ProductList";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import db from "@/../db.json"
+import { redirect } from 'next/navigation'
 
 async function getProductsSearch(search: string, setIsEmptyRes: any) {
+  console.log(search);
+  
   const serverUrl = process.env.SERVER_URL || "";
   const response = await fetch(
     `${serverUrl}/api/products/search?query=${search}`
@@ -20,9 +24,10 @@ async function getProductsSearch(search: string, setIsEmptyRes: any) {
 
   if (data.length == 0) {
     setIsEmptyRes(true);
-    const response = await fetch("https://dummyjson.com/products");
-    data = await response.json();
-    return data.products;
+    const response = db;
+    return response
+    //const response = await fetch("https://dummyjson.com/products");
+    //return response.json();
   } else {
     setIsEmptyRes(false);
   }
@@ -83,6 +88,8 @@ export const SearchCatalog: React.FC<{}> = ({}) => {
         setIsLoading(false);
       };
       fetchData();
+    } else {
+      redirect('/catalog')
     }
   }, [search]);
 

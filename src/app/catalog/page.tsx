@@ -1,9 +1,12 @@
 import { Catalog } from "@/components/catalog/Catalog";
 import { typeCartItem } from "@/redux/features/cart-slice";
+import db from "@/../db.json"
 
 async function getProducts() {
-  const response = await fetch("https://dummyjson.com/products");
-  return response.json();
+  const response = db;
+  return response
+  //const response = await fetch("https://dummyjson.com/products");
+  //return response.json();
 }
 
 export default async function Clothers() {

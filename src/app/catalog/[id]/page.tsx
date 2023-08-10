@@ -5,6 +5,8 @@ import Images_gallery from "@/components/product/images_gallery/Images_gallery";
 import RecentlyViewedList from "@/utils/RecentlyViewedList";
 import { RecentlyViewed_Carousel } from "@/components/product/recentlyviewed_carousel/RecentlyViewed_Carousel";
 import { ProductCardButtons } from "@/components/product/buttons/ProductCardButtons";
+import db from "@/../db.json";
+import { typeCartItem } from "@/redux/features/cart-slice";
 
 type Props = {
   params: {
@@ -13,12 +15,18 @@ type Props = {
 };
 
 async function getProduct(id: number) {
-  const response = await fetch(`https://dummyjson.com/products/${id}`);
-  return response.json();
+  const response = db;
+  const findItem: typeCartItem | undefined = response.products.find(
+    (item) => item.id == id
+  );
+
+  return findItem;
+  //const response = await fetch(`https://dummyjson.com/products/${id}`);
+  //return response.json();
 }
 
 export default async function Clother({ params: { id } }: Props) {
-  const product = await getProduct(id);
+  const product: typeCartItem | undefined = await getProduct(id);
 
   const breadcrumbs = [
     {
@@ -33,8 +41,12 @@ export default async function Clother({ params: { id } }: Props) {
       link: "/",
     },
     { title: "Каталог", link: "/clother" },
-    { title: product.title, link: `/clother/${product.id}` },
+    { title: product?.title, link: product ? `/clother/${product.id}` : "" },
   ];
+
+  if (!product) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={styles.page_container}>
@@ -50,12 +62,6 @@ export default async function Clother({ params: { id } }: Props) {
           <h1 className={styles.product_card__title}>{product.title}</h1>
           <div className={styles.product_card__price}>
             <div>{product.price} ₽</div>
-            <s>
-              {Math.round(
-                product.price / (1 - product.discountPercentage / 100)
-              )}{" "}
-              ₽
-            </s>
           </div>
 
           <div className={styles.product__info}>

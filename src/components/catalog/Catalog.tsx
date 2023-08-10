@@ -10,7 +10,7 @@ import Breadcrumb from "@/utils/Breadcrumb";
 import { ProductList } from "./product/ProductList";
 
 export const Catalog: React.FC<{
-  props: typeCartItem[];
+  props: any[];
   priceRange: { minPriceDefault: number; maxPriceDefault: number };
 }> = ({ props, priceRange }) => {
   const [filteredProducts, setFilteredProducts] = useState<typeCartItem[]>([]);
