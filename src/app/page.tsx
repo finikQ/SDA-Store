@@ -4,10 +4,13 @@ import MainSlider from "@/components/main/slider/MainSlider";
 import MainCarousel from "@/components/main/carousel/MainCarousel";
 import MainTopCategories from "@/components/main/top_categories/MainTopCategories";
 import MainBlog from "@/components/main/blog/MainBlog";
+import db from "@/../db.json";
 
 async function getProducts() {
-  const response = await fetch("https://dummyjson.com/products");
-  return response.json();
+  const response = db;
+  return response;
+  // const response = await fetch("https://dummyjson.com/products");
+  // return response.json();
 }
 export type typeSlides = {
   title: string;

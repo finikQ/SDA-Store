@@ -15,15 +15,16 @@ export type typeCartItem = {
   title: string;
   description: string;
   brand: string;
+  material: string;
+  color: string[];
   category: string;
   size: string;
   price: number;
   priceBeforeDiscount: number;
   condition: string;
   stock: number;
-  ProductionYear: string | number;
-  ManufacturerCountry: string;
-  Material: string;
+  productionYear: string | number;
+  manufacturerCountry: string;
   thumbnail: string;
   images: string[];
 

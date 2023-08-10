@@ -1,5 +1,4 @@
 .page_container {
-
 }
 
 .breadcrumbs_container {
@@ -33,12 +32,12 @@
   gap: 12px;
 }
 
-.product_card__title{
-  color:  #1E212C;
-font-size: 46px;
-font-style: normal;
-font-weight: 900;
-line-height: 130%; 
+.product_card__title {
+  color: #1e212c;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 130%;
 }
 
 .product_card__price {
@@ -65,7 +64,6 @@ line-height: 130%;
   line-height: 150%; /* 27px */
   text-decoration-line: strikethrough;
 }
-
 
 .product__info {
   color: #424551;

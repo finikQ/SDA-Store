@@ -65,22 +65,44 @@ export default async function Clother({ params: { id } }: Props) {
           </div>
 
           <div className={styles.product__info}>
-            <div className={styles.product__info__description}>
-              <strong>Бренд: </strong>
-              {product.brand}
-            </div>
-            <div className={styles.product__info__description}>
-              <strong>Цвет: </strong>
-              {<u>цвет</u>}
-            </div>
+            {product.brand && (
+              <div className={styles.product__info__description}>
+                <strong>Бренд: </strong>
+                {product.brand}
+              </div>
+            )}
+            {product.color.length > 0 && (
+              <div className={styles.product__info__description}>
+                <strong>Цвет: </strong>
+                {product.color}
+              </div>
+            )}
+            {product.material && (
+              <div className={styles.product__info__description}>
+                <strong>Материал: </strong>
+                {product.material}
+              </div>
+            )}
             <div className={styles.product__info__description}>
               <strong>Описание: </strong>
               {product.description}
             </div>
             <div className={styles.product__info__description}>
               <strong>Состояние: </strong>
-              {<u>состояние</u>}
+              {product.condition}
             </div>
+            {product.productionYear && (
+              <div className={styles.product__info__description}>
+                <strong>Год производства: </strong>
+                {product.productionYear}
+              </div>
+            )}
+            {product.manufacturerCountry && (
+              <div className={styles.product__info__description}>
+                <strong>Страна производства: </strong>
+                {product.manufacturerCountry}
+              </div>
+            )}
           </div>
           <ProductCardButtons props={product} />
         </div>

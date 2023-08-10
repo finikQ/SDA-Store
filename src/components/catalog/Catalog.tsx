@@ -21,12 +21,12 @@ export const Catalog: React.FC<{
     brands: string[];
     minPrice: number;
     maxPrice: number;
-    sizes: string[];
+    types: string[];
   }>({
     brands: [],
     minPrice: minPriceDefault,
     maxPrice: maxPriceDefault,
-    sizes: [],
+    types: [],
   });
 
   const breadcrumbs = [
@@ -51,7 +51,7 @@ export const Catalog: React.FC<{
       const priceFilter =
         product.price >= filters.minPrice && product.price <= filters.maxPrice;
       const sizeFilter =
-        filters.sizes.length === 0 || filters.sizes.includes(product.category);
+        filters.types.length === 0 || filters.types.includes(product.category);
       return brandFilter && priceFilter && sizeFilter;
     });
 
@@ -71,7 +71,7 @@ export const Catalog: React.FC<{
   };
 
   const clearSizeFilter = () => {
-    setFilters({ ...filters, sizes: [] });
+    setFilters({ ...filters, types: [] });
   };
 
   const clearAllFilters = () => {
@@ -79,7 +79,7 @@ export const Catalog: React.FC<{
       brands: [],
       minPrice: minPriceDefault,
       maxPrice: maxPriceDefault,
-      sizes: [],
+      types: [],
     });
   };
 
@@ -120,25 +120,25 @@ export const Catalog: React.FC<{
               </button>
             ) : null}
 
-            {filters.sizes.length > 0 ? (
+            {filters.types.length > 0 ? (
               <button
                 className={styles.activeFilters}
                 onClick={clearSizeFilter}
               >
                 <Image
                   src="/catalog/cross.svg"
-                  alt="Убрать фильтр размера"
+                  alt="Убрать фильтр типа"
                   width={16}
                   height={16}
                 />
-                <span>Размер</span>
+                <span>Тип</span>
               </button>
             ) : null}
 
             {filters.brands.length > 0 ||
             filters.minPrice != minPriceDefault ||
             filters.maxPrice != maxPriceDefault ||
-            filters.sizes.length > 0 ? (
+            filters.types.length > 0 ? (
               <button
                 className={styles.activeFilters}
                 onClick={clearAllFilters}

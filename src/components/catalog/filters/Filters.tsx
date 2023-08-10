@@ -14,7 +14,7 @@ export const Filters: React.FC<{
   const [visibleFilter, setVisibleFilters] = useState({
     visibleBrands: false,
     visiblePrices: false,
-    visibleSizes: false,
+    visibleTypes: false,
   });
 
   const handleShowBrands = () => {
@@ -31,10 +31,10 @@ export const Filters: React.FC<{
     }));
   };
 
-  const handleShowSizes = () => {
+  const handleShowTypes = () => {
     setVisibleFilters((prev) => ({
       ...prev,
-      visibleSizes: !visibleFilter.visibleSizes,
+      visibleTypes: !visibleFilter.visibleTypes,
     }));
   };
 
@@ -55,7 +55,7 @@ export const Filters: React.FC<{
   };
 
   let brandSet: Set<string> = new Set(props.map((item) => item.brand));
-  let sizeSet: Set<string> = new Set(props.map((item) => item.category));
+  let typesSet: Set<string> = new Set(props.map((item) => item.category));
 
   return (
     <>
@@ -185,19 +185,19 @@ export const Filters: React.FC<{
         <section className={styles.filters__filter}>
           <button
             className={styles.filters__filter__expand_btn}
-            onClick={handleShowSizes}
+            onClick={handleShowTypes}
           >
-            <div className={styles.filters__filter__name}>Размер</div>
+            <div className={styles.filters__filter__name}>Тип</div>
             <Image
               src={
-                visibleFilter.visibleSizes
+                visibleFilter.visibleTypes
                   ? "/catalog/filter/minus.svg"
                   : "/catalog/filter/plus.svg"
               }
               alt={
-                visibleFilter.visibleSizes
-                  ? "Скрыть фильтр размеров"
-                  : "Открыть фильтр размеров"
+                visibleFilter.visibleTypes
+                  ? "Скрыть фильтр типа"
+                  : "Открыть фильтр типа"
               }
               width={16}
               height={16}
@@ -205,28 +205,28 @@ export const Filters: React.FC<{
           </button>
           <div
             className={` ${
-              visibleFilter.visibleSizes
+              visibleFilter.visibleTypes
                 ? styles.filter__open
                 : styles.filter__close
             }`}
           >
             <ul className={`${styles.filters__filter__list}`}>
-              {Array.from(sizeSet).map((mapItem) => (
+              {Array.from(typesSet).map((mapItem) => (
                 <li key={mapItem}>
                   <label
                     className={styles.filters__filter__label}
                     onClick={() => {
-                      if (filters.sizes.includes(mapItem)) {
+                      if (filters.types.includes(mapItem)) {
                         setFilters({
                           ...filters,
-                          sizes: filters.sizes.filter(
+                          types: filters.types.filter(
                             (size: any) => size !== mapItem
                           ),
                         });
                       } else {
                         setFilters({
                           ...filters,
-                          sizes: [...filters.sizes, mapItem],
+                          types: [...filters.types, mapItem],
                         });
                       }
                     }}
@@ -234,14 +234,14 @@ export const Filters: React.FC<{
                     <div>
                       <Image
                         src={
-                          filters.sizes.includes(mapItem)
+                          filters.types.includes(mapItem)
                             ? "/catalog/filter/checked.svg"
                             : "/catalog/filter/unchecked.svg"
                         }
                         width={16}
                         height={16}
                         alt={
-                          filters.sizes.includes(mapItem)
+                          filters.types.includes(mapItem)
                             ? "checked"
                             : "unchecked"
                         }

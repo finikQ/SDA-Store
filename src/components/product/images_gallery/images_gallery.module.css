@@ -1,15 +1,18 @@
 .product__gallery {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .product__gallery__photo {
-    border-radius: 4px;
-  }
-  
-  .product__gallery__preview {
-    display: flex;
-    gap: 20px;
-    cursor: pointer;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product__gallery__photo {
+  border-radius: 4px;
+  max-width: 600px;
+}
+
+.product__gallery__preview {
+  display: flex;
+  gap: 20px;
+  cursor: pointer;
+  max-width: 600px;
+  overflow: hidden;
+}

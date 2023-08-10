@@ -130,7 +130,7 @@
 }
 
 .card:hover .card__description {
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
 }
 
 .card__footer {
