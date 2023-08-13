@@ -50,9 +50,9 @@ export const Catalog: React.FC<{
         filters.brands.length === 0 || filters.brands.includes(product.brand);
       const priceFilter =
         product.price >= filters.minPrice && product.price <= filters.maxPrice;
-      const sizeFilter =
-        filters.types.length === 0 || filters.types.includes(product.category);
-      return brandFilter && priceFilter && sizeFilter;
+      const typeFilter =
+        filters.types.length === 0 || filters.types.includes(product.type);
+      return brandFilter && priceFilter && typeFilter;
     });
 
     setFilteredProducts(filteredProps);
@@ -70,7 +70,7 @@ export const Catalog: React.FC<{
     });
   };
 
-  const clearSizeFilter = () => {
+  const clearTypeFilter = () => {
     setFilters({ ...filters, types: [] });
   };
 
@@ -123,7 +123,7 @@ export const Catalog: React.FC<{
             {filters.types.length > 0 ? (
               <button
                 className={styles.activeFilters}
-                onClick={clearSizeFilter}
+                onClick={clearTypeFilter}
               >
                 <Image
                   src="/catalog/cross.svg"

@@ -2,6 +2,7 @@
   border-radius: 4px;
   width: calc(100% / 3 - 30px);
   max-width: 285px;
+  min-height: 436px;
   flex-grow: 1;
   box-sizing: border-box;
   position: relative;
@@ -62,17 +63,16 @@
 .card__link {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: auto;
+  height: auto;
   border-radius: 4px;
 }
 
 .card__img {
   max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   border-radius: 4px;
-  transition: transform 0.3s ease-in-out;
   display: block;
   width: auto;
 }

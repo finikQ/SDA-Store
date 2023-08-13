@@ -54,8 +54,8 @@ export const Filters: React.FC<{
     }
   };
 
-  let brandSet: Set<string> = new Set(props.map((item) => item.brand));
-  let typesSet: Set<string> = new Set(props.map((item) => item.category));
+  let brandSet: Set<string> = new Set(props.map((item) => item.brand).sort());
+  let typesSet: Set<string> = new Set(props.map((item) => item.type).sort());
 
   return (
     <>
@@ -126,7 +126,7 @@ export const Filters: React.FC<{
                         className={styles.checked_image}
                       />
                     </div>
-                    <div className={styles.filters__filter__category_name}>
+                    <div className={styles.filters__filter__type_name}>
                       {mapItem}
                     </div>
                   </label>
@@ -220,7 +220,7 @@ export const Filters: React.FC<{
                         setFilters({
                           ...filters,
                           types: filters.types.filter(
-                            (size: any) => size !== mapItem
+                            (type: any) => type !== mapItem
                           ),
                         });
                       } else {
@@ -248,7 +248,7 @@ export const Filters: React.FC<{
                         className={styles.checked_image}
                       />
                     </div>
-                    <div className={styles.filters__filter__category_name}>
+                    <div className={styles.filters__filter__type_name}>
                       {mapItem}
                     </div>
                   </label>

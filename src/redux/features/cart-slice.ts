@@ -17,7 +17,7 @@ export type typeCartItem = {
   brand: string;
   material: string;
   color: string[];
-  category: string;
+  type: string;
   size: string;
   price: number;
   priceBeforeDiscount: number;

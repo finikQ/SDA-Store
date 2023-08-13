@@ -125,7 +125,7 @@ export const Cart = () => {
             <section className={styles.cart__section}>
               <div className={styles.cart__header}>
                 <h1 className={styles.title}>Корзина</h1>
-                <Link className={styles.link} href={"/clother"}>
+                <Link className={styles.link} href={"/catalog"}>
                   В Каталог
                 </Link>
               </div>

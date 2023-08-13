@@ -40,8 +40,8 @@ export default async function Clother({ params: { id } }: Props) {
       ),
       link: "/",
     },
-    { title: "Каталог", link: "/clother" },
-    { title: product?.title, link: product ? `/clother/${product.id}` : "" },
+    { title: "Каталог", link: "/catalog" },
+    { title: product?.title, link: product ? `/catalog/${product.id}` : "" },
   ];
 
   if (!product) {

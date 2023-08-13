@@ -1,25 +1,25 @@
 import { Catalog } from "@/components/catalog/Catalog";
 import { typeCartItem } from "@/redux/features/cart-slice";
-import db from "@/../db.json"
+import db from "@/../db.json";
 
 async function getProducts() {
   const response = db;
-  return response
+  return response;
   //const response = await fetch("https://dummyjson.com/products");
   //return response.json();
 }
 
 export default async function Clothers() {
-  let clothersList = await getProducts();
+  let productList = await getProducts();
 
   const priceRange = {
     minPriceDefault: Math.min(
-      ...clothersList.products.map((item: typeCartItem) => item.price)
+      ...productList.products.map((item: typeCartItem) => item.price)
     ),
     maxPriceDefault: Math.max(
-      ...clothersList.products.map((item: typeCartItem) => item.price)
+      ...productList.products.map((item: typeCartItem) => item.price)
     ),
   };
 
-  return <Catalog props={clothersList.products} priceRange={priceRange} />;
+  return <Catalog props={productList.products} priceRange={priceRange} />;
 }

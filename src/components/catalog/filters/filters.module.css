@@ -103,7 +103,7 @@
   transition: max-height 0.3s ease;
 }
 
-.filters__filter__category_name {
+.filters__filter__type_name {
   color: #424551;
   font-size: 14px;
   font-style: normal;

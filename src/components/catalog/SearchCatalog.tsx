@@ -14,8 +14,6 @@ import db from "@/../db.json";
 import { redirect } from "next/navigation";
 
 async function getProductsSearch(search: string, setIsEmptyRes: any) {
-  console.log(search);
-
   const serverUrl = process.env.SERVER_URL || "";
   const response = await fetch(
     `${serverUrl}/api/products/search?query=${search}`
@@ -71,12 +69,12 @@ export const SearchCatalog: React.FC<{}> = ({}) => {
     brands: string[];
     minPrice: number;
     maxPrice: number;
-    sizes: string[];
+    types: string[];
   }>({
     brands: [],
     minPrice: 0,
     maxPrice: 100000,
-    sizes: [],
+    types: [],
   });
 
   useEffect(() => {
@@ -99,9 +97,9 @@ export const SearchCatalog: React.FC<{}> = ({}) => {
         filters.brands.length === 0 || filters.brands.includes(product.brand);
       const priceFilter =
         product.price >= filters.minPrice && product.price <= filters.maxPrice;
-      const sizeFilter =
-        filters.sizes.length === 0 || filters.sizes.includes(product.category);
-      return brandFilter && priceFilter && sizeFilter;
+      const typeFilter =
+        filters.types.length === 0 || filters.types.includes(product.type);
+      return brandFilter && priceFilter && typeFilter;
     });
 
     setFilteredProducts(filteredProps);
@@ -119,8 +117,8 @@ export const SearchCatalog: React.FC<{}> = ({}) => {
     });
   };
 
-  const clearSizeFilter = () => {
-    setFilters({ ...filters, sizes: [] });
+  const clearTypeFilter = () => {
+    setFilters({ ...filters, types: [] });
   };
 
   const clearAllFilters = () => {
@@ -128,7 +126,7 @@ export const SearchCatalog: React.FC<{}> = ({}) => {
       brands: [],
       minPrice: Math.min.apply(null, priceSet),
       maxPrice: Math.max.apply(null, priceSet),
-      sizes: [],
+      types: [],
     });
   };
 
@@ -168,10 +166,10 @@ export const SearchCatalog: React.FC<{}> = ({}) => {
               </button>
             ) : null}
 
-            {filters.sizes.length > 0 ? (
+            {filters.types.length > 0 ? (
               <button
                 className={styles.activeFilters}
-                onClick={clearSizeFilter}
+                onClick={clearTypeFilter}
               >
                 <Image
                   src="/catalog/cross.svg"
@@ -186,7 +184,7 @@ export const SearchCatalog: React.FC<{}> = ({}) => {
             {filters.brands.length > 0 ||
             filters.minPrice != 0 ||
             filters.maxPrice != 100000 ||
-            filters.sizes.length > 0 ? (
+            filters.types.length > 0 ? (
               <button
                 className={styles.activeFilters}
                 onClick={clearAllFilters}

@@ -31,7 +31,6 @@ export const Product = ({ props, isFavorite, handlers, cardSize }) => {
 
   let styles = cardSize === "small" ? productSmall : productLarge;
 
-  let heightBlock = hover ? heightRef.current.clientHeight : 561.59;
   return (
     <div
       onMouseOver={handleMouseOver}
@@ -39,7 +38,6 @@ export const Product = ({ props, isFavorite, handlers, cardSize }) => {
       key={props.id}
       className={`${styles.card} ${hover ? styles.hover : ""}`}
       ref={heightRef}
-      style={hover ? { height: heightBlock } : {}}
     >
       <div className={`${styles.card__wrapper} `}>
         <Link className={styles.card__link} href={`/catalog/${props.id}`}>
