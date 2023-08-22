@@ -54,12 +54,16 @@ const TheFooter = () => {
         <div>
           <h3>Контакты</h3>
           <div>
-            <Link href="tel:8-123-456-78-90">8-123-456-78-90</Link>
+            <a href="tel:8-123-456-78-90">8-123-456-78-90</a>
           </div>
           <div>
-            <Link href="mailto:example@example.com">example@example.com</Link>
+            <a href="mailto:example@example.com">example@example.com</a>
           </div>
-          <div>ул. Примерная, 123</div>
+          <div>
+            <a target="_blank" href="https://yandex.ru/maps/-/CDQqUT79">
+              ул. Примерная, 123
+            </a>
+          </div>
           <div>
             <ul className={styles.footer__social}>
               {socials.map((item): any => (
